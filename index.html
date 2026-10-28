@@ -1205,6 +1205,7 @@
             <div class="footer-links">
                 <h4>Top Destinations</h4>
                 <ul>
+                    <li><a href="#">University of Peradeniya</a></li>
                     <li><a href="#">Sigiriya Lion Rock</a></li>
                     <li><a href="#">Ella & Nine Arch Bridge</a></li>
                     <li><a href="#">Galle Fort Walk</a></li>
@@ -1231,6 +1232,18 @@
     <script>
         // Initial articles data specifically for Sri Lanka tourism
         const DEFAULT_ARTICLES = [
+            {
+                id: "art-7",
+                region: "Central Highlands",
+                title: "University of Peradeniya: Exploring Sri Lanka's Most Picturesque Campus and Royal River Valley",
+                category: "Heritage & Architecture",
+                image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80",
+                readTime: "6 min read",
+                author: "Akash",
+                date: "October 28, 2026",
+                excerpt: "Nestled along the banks of the Mahaweli River at the foot of the Hantana Mountain Range, the University of Peradeniya is celebrated as one of the most breathtaking universities in the world. Designed with indigenous Kandyan architectural motifs by Shirley de Alwis and Sir Patrick Abercrombie, its lush avenues of flowering Mara trees, historic halls, and tranquil botanical surroundings make it an enchanting cultural stop for international travelers visiting Kandy.",
+                tips: "Foreign Visitor Tip: The campus is open to respectful visitors and is located just 15 minutes outside Kandy city (easily accessible via tuk-tuk or train to Sarasavi Uyana station). Don't miss walking beneath the blooming yellow cassia and flame trees in April/May, and combine your trip with the adjacent Royal Botanical Gardens of Peradeniya."
+            },
             {
                 id: "art-1",
                 region: "Cultural Triangle",
@@ -1310,21 +1323,39 @@
             const stored = localStorage.getItem('ceylon_articles');
             if (stored) {
                 try {
-                    const parsed = JSON.parse(stored);
-                    // Ensure the new Kandy Perahera article exists in stored list if it's not already there
-                    const hasKandy = parsed.some(a => a.id === 'art-6' || a.title.toLowerCase().includes('kandy'));
+                    let parsed = JSON.parse(stored);
+                    
+                    // 1. Ensure University article is placed at the top (first position)
+                    const universityArt = DEFAULT_ARTICLES.find(a => a.id === 'art-7');
+                    if (universityArt) {
+                        const existingIdx = parsed.findIndex(a => a.id === 'art-7' || a.title.toLowerCase().includes('peradeniya'));
+                        if (existingIdx !== -1) {
+                            // Move to top if not already at index 0
+                            if (existingIdx !== 0) {
+                                const [existing] = parsed.splice(existingIdx, 1);
+                                parsed.unshift(existing);
+                            }
+                        } else {
+                            // Insert at top
+                            parsed.unshift(universityArt);
+                        }
+                    }
+
+                    // 2. Ensure Kandy Perahera exists
+                    const hasKandy = parsed.some(a => a.id === 'art-6' || a.title.toLowerCase().includes('perahera'));
                     if (!hasKandy) {
                         const kandyArt = DEFAULT_ARTICLES.find(a => a.id === 'art-6');
                         if (kandyArt) {
-                            // Insert before the last article (Yala Safari)
+                            // Insert before the last article
                             if (parsed.length > 0) {
                                 parsed.splice(parsed.length - 1, 0, kandyArt);
                             } else {
                                 parsed.push(kandyArt);
                             }
-                            saveArticles(parsed);
                         }
                     }
+
+                    saveArticles(parsed);
                     return parsed;
                 } catch(e) { }
             }
