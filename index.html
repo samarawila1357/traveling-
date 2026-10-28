@@ -1,1 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust Chronicles | Travel Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f766e;
+            --primary-hover: #115e59;
+            --accent: #f97316;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --border-color: #e2e8f0;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+            --shadow-hover: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--bg-white);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn-subscribe {
+            background-color: var(--primary);
+            color: #ffffff !important;
+            padding: 0.5rem 1.1rem;
+            border-radius: 9999px;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-subscribe:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(135deg, rgba(15, 118, 110, 0.9), rgba(17, 94, 89, 0.95)), 
+                        url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            color: #ffffff;
+            padding: 4.5rem 1.5rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.025em;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            opacity: 0.92;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 2.5fr 1fr;
+            gap: 2.5rem;
+        }
+
+        /* Articles Section */
+        .articles-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .article-card {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .article-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .article-body {
+            padding: 1.75rem;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .badge {
+            background-color: #f0fdf4;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 0.2rem 0.65rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .article-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-main);
+            line-height: 1.35;
+        }
+
+        .article-title:hover {
+            color: var(--primary);
+        }
+
+        .article-excerpt {
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+            font-size: 0.98rem;
+        }
+
+        .read-more {
+            color: var(--primary);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.95rem;
+        }
+
+        .read-more:hover {
+            color: var(--primary-hover);
+            text-decoration: underline;
+        }
+
+        /* Sidebar */
+        aside {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .sidebar-widget {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .widget-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .widget-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
+        .author-box {
+            text-align: center;
+        }
+
+        .author-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 0.8rem;
+            border: 3px solid var(--border-color);
+        }
+
+        .category-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .category-list a {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            padding: 0.25rem 0;
+            transition: color 0.2s;
+        }
+
+        .category-list a:hover {
+            color: var(--primary);
+        }
+
+        .newsletter-form input {
+            width: 100%;
+            padding: 0.7rem 0.9rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        .newsletter-form button {
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .newsletter-form button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            padding: 3rem 1.5rem 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #334155;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 1.5rem auto 0;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span>✈️</span> Wanderlust Chronicles
+            </a>
+            <ul class="nav-links">
+                <li><a href="#destinations">Destinations</a></li>
+                <li><a href="#articles">Articles</a></li>
+                <li><a href="#tips">Travel Tips</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#newsletter" class="btn-subscribe">Subscribe</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Explore The Uncharted World</h1>
+            <p>Inspiring stories, hidden gems, and comprehensive itineraries from journeys across the globe.</p>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="container" id="articles">
+        
+        <!-- Articles Feed -->
+        <section class="articles-list">
+            
+            <!-- Article 1 -->
+            <article class="article-card">
+                <img src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1000&q=80" alt="Sydney Harbour" class="article-image">
+                <div class="article-body">
+                    <div class="article-meta">
+                        <span class="badge">Oceania</span>
+                        <span>October 24, 2026</span>
+                        <span>•</span>
+                        <span>6 min read</span>
+                    </div>
+                    <h2><a href="#" class="article-title">A 48-Hour Escapade in Sydney: Hidden Bays & Local Eats</a></h2>
+                    <p class="article-excerpt">
+                        Beyond the iconic Opera House and Bondi Beach lies a calmer, vibrant side of Sydney. Discover scenic cliff-top walks, serene harbour coves, and world-class specialty coffee spots loved by locals.
+                    </p>
+                    <a href="#" class="read-more">Read full story &rarr;</a>
+                </div>
+            </article>
+
+            <!-- Article 2 -->
+            <article class="article-card">
+                <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1000&q=80" alt="Kyoto Bamboo Forest" class="article-image">
+                <div class="article-body">
+                    <div class="article-meta">
+                        <span class="badge">Asia</span>
+                        <span>October 18, 2026</span>
+                        <span>•</span>
+                        <span>8 min read</span>
+                    </div>
+                    <h2><a href="#" class="article-title">Serenity in Kyoto: Wandering Ancient Temples and Bamboo Groves</a></h2>
+                    <p class="article-excerpt">
+                        Kyoto in the autumn is a blend of fiery maples, gentle matcha tea ceremonies, and quiet zen stone gardens. Here is your ultimate beginner's guide to navigating Japan's cultural heartland respectfully.
+                    </p>
+                    <a href="#" class="read-more">Read full story &rarr;</a>
+                </div>
+            </article>
+
+            <!-- Article 3 -->
+            <article class="article-card">
+                <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1000&q=80" alt="Road Trip Van" class="article-image">
+                <div class="article-body">
+                    <div class="article-meta">
+                        <span class="badge">Travel Tips</span>
+                        <span>October 10, 2026</span>
+                        <span>•</span>
+                        <span>5 min read</span>
+                    </div>
+                    <h2><a href="#" class="article-title">The Minimalist Backpacker: 10 Items You Always Overpack</a></h2>
+                    <p class="article-excerpt">
+                        Lighten your load and free your mind. We review the essential multi-purpose gear worth keeping in your carry-on, and the bulky extras you should leave behind for your next big adventure.
+                    </p>
+                    <a href="#" class="read-more">Read full story &rarr;</a>
+                </div>
+            </article>
+
+            <!-- Article 4 -->
+            <article class="article-card">
+                <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1000&q=80" alt="Cinque Terre Italy" class="article-image">
+                <div class="article-body">
+                    <div class="article-meta">
+                        <span class="badge">Europe</span>
+                        <span>September 29, 2026</span>
+                        <span>•</span>
+                        <span>7 min read</span>
+                    </div>
+                    <h2><a href="#" class="article-title">Coastal Hiking Through Italy’s Colorful Cinque Terre</a></h2>
+                    <p class="article-excerpt">
+                        Trekking along rugged Mediterranean cliffs connecting five pastel fishing villages. Learn about trail permits, train connections, and the best local focaccia spots along the route.
+                    </p>
+                    <a href="#" class="read-more">Read full story &rarr;</a>
+                </div>
+            </article>
+
+        </section>
+
+        <!-- Sidebar -->
+        <aside>
+            <!-- Author Card -->
+            <div class="sidebar-widget author-box" id="about">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Author" class="author-img">
+                <h3 style="font-size: 1.1rem; margin-bottom: 0.25rem;">Elena Rostova</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">Full-time Nomad & Photographer</p>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">
+                    Documenting slower journeys, culture, and nature hikes since 2018. Over 45 countries explored and counting!
+                </p>
+            </div>
+
+            <!-- Categories -->
+            <div class="sidebar-widget" id="destinations">
+                <h3 class="widget-title">Categories</h3>
+                <ul class="category-list">
+                    <li><a href="#"><span>Destinations</span> <span>18</span></a></li>
+                    <li><a href="#"><span>Solo Travel</span> <span>12</span></a></li>
+                    <li><a href="#"><span>Budget Guides</span> <span>9</span></a></li>
+                    <li><a href="#"><span>Photography</span> <span>7</span></a></li>
+                    <li><a href="#"><span>Food & Culture</span> <span>14</span></a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter Subscription -->
+            <div class="sidebar-widget" id="newsletter">
+                <h3 class="widget-title">Get Monthly Letters</h3>
+                <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+                    Receive secret travel spots, itineraries, and packing checklists straight to your inbox.
+                </p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Join Newsletter</button>
+                </form>
+            </div>
+        </aside>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h3 style="color: #fff; margin-bottom: 0.5rem;">Wanderlust Chronicles</h3>
+                <p style="font-size: 0.9rem;">Inspiring your next great journey one story at a time.</p>
+            </div>
+            <div style="display: flex; gap: 1.25rem; font-size: 0.9rem;">
+                <a href="#about">About</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Wanderlust Chronicles. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
