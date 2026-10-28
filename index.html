@@ -9,9 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #047857;          /* Lush tropical green */
+            --primary: #047857;          /* Tropical green */
             --primary-hover: #065f46;
-            --accent: #d97706;           /* Warm Ceylon gold/amber */
+            --accent: #d97706;           /* Ceylon amber */
+            --danger: #ef4444;
             --text-main: #1e293b;
             --text-muted: #64748b;
             --bg-light: #f8fafc;
@@ -42,7 +43,7 @@
             text-decoration: none;
         }
 
-        /* Top Announcement / Tourist Notice */
+        /* Top Announcement */
         .top-notice {
             background-color: #064e3b;
             color: #d1fae5;
@@ -52,7 +53,7 @@
             font-weight: 500;
         }
 
-        /* Header & Navigation */
+        /* Header Navigation */
         header {
             background-color: var(--bg-white);
             border-bottom: 1px solid var(--border-color);
@@ -107,22 +108,28 @@
             color: var(--primary);
         }
 
-        .btn-itinerary {
-            background-color: var(--primary);
+        .btn-admin-nav {
+            background-color: #1e293b;
             color: #ffffff !important;
-            padding: 0.5rem 1.1rem;
+            padding: 0.5rem 1rem;
             border-radius: 9999px;
+            font-size: 0.85rem;
             font-weight: 600;
-            transition: background-color 0.2s ease;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: background 0.2s;
         }
 
-        .btn-itinerary:hover {
-            background-color: var(--primary-hover);
+        .btn-admin-nav:hover {
+            background-color: #0f172a;
         }
 
         /* Hero Banner */
         .hero {
-            background: linear-gradient(180deg, rgba(4, 120, 87, 0.82) 0%, rgba(15, 23, 42, 0.88) 100%), 
+            background: linear-gradient(180deg, rgba(4, 120, 87, 0.84) 0%, rgba(15, 23, 42, 0.9) 100%), 
                         url('https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
             color: #ffffff;
             padding: 5rem 1.5rem;
@@ -161,7 +168,7 @@
             line-height: 1.6;
         }
 
-        /* Highlights Ticker */
+        /* Travel Ticker */
         .travel-ticker {
             background: #ffffff;
             border-bottom: 1px solid var(--border-color);
@@ -196,6 +203,28 @@
             gap: 2.5rem;
         }
 
+        /* Feed Header */
+        .feed-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .feed-header h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .article-count-badge {
+            font-size: 0.85rem;
+            background: #e2e8f0;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            color: #475569;
+            font-weight: 600;
+        }
+
         /* Articles Section */
         .articles-list {
             display: flex;
@@ -210,6 +239,7 @@
             overflow: hidden;
             box-shadow: var(--shadow-sm);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
         }
 
         .article-card:hover {
@@ -221,6 +251,7 @@
             position: relative;
             overflow: hidden;
             height: 290px;
+            background: #e2e8f0;
         }
 
         .article-image {
@@ -238,7 +269,7 @@
             position: absolute;
             top: 1rem;
             left: 1rem;
-            background: rgba(15, 23, 42, 0.75);
+            background: rgba(15, 23, 42, 0.78);
             backdrop-filter: blur(4px);
             color: #ffffff;
             font-size: 0.75rem;
@@ -246,6 +277,40 @@
             padding: 0.25rem 0.65rem;
             border-radius: 9999px;
             text-transform: uppercase;
+        }
+
+        .card-admin-actions {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+
+        .btn-card-action {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #1e293b;
+            padding: 0.35rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+            transition: background 0.2s;
+        }
+
+        .btn-card-action:hover {
+            background: #ffffff;
+        }
+
+        .btn-card-action.btn-del {
+            color: var(--danger);
+        }
+        .btn-card-action.btn-del:hover {
+            background: #fee2e2;
         }
 
         .article-body {
@@ -279,25 +344,23 @@
             line-height: 1.35;
         }
 
-        .article-title:hover {
-            color: var(--primary);
-        }
-
         .article-excerpt {
             color: var(--text-muted);
             margin-bottom: 1.25rem;
             font-size: 0.96rem;
             line-height: 1.65;
+            white-space: pre-line;
         }
 
         .foreign-traveler-tips {
             background-color: #fffbeb;
             border-left: 3px solid var(--accent);
-            padding: 0.65rem 0.9rem;
+            padding: 0.75rem 1rem;
             border-radius: 4px;
-            font-size: 0.85rem;
+            font-size: 0.87rem;
             color: #92400e;
             margin-bottom: 1.25rem;
+            line-height: 1.55;
         }
 
         .article-footer {
@@ -321,21 +384,14 @@
             width: 28px;
             height: 28px;
             border-radius: 50%;
+            object-fit: cover;
         }
 
         .read-more {
             color: var(--primary);
             font-weight: 600;
             font-size: 0.92rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-            transition: gap 0.2s;
-        }
-
-        .read-more:hover {
-            gap: 0.55rem;
-            color: var(--primary-hover);
+            cursor: pointer;
         }
 
         /* Sidebar */
@@ -431,7 +487,47 @@
             color: var(--text-muted);
         }
 
-        /* Essential Quick Tips */
+        /* Admin Quick Launch in Sidebar */
+        .admin-sidebar-box {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #ffffff;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .admin-sidebar-box h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .admin-sidebar-box p {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+
+        .btn-launch-panel {
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 0.7rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-launch-panel:hover {
+            background-color: #059669;
+        }
+
+        /* Quick Tips */
         .quick-facts {
             list-style: none;
             display: flex;
@@ -449,26 +545,6 @@
 
         .quick-facts strong {
             color: var(--text-main);
-        }
-
-        /* Regions Widget */
-        .region-links {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-        }
-
-        .region-links a {
-            display: flex;
-            justify-content: space-between;
-            color: var(--text-muted);
-            font-size: 0.92rem;
-            transition: color 0.2s;
-        }
-
-        .region-links a:hover {
-            color: var(--primary);
         }
 
         /* Newsletter Widget */
@@ -496,6 +572,270 @@
 
         .newsletter-form button:hover {
             background-color: var(--primary-hover);
+        }
+
+        /* MODAL / ADMIN DRAWER */
+        .admin-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .admin-modal {
+            background: #ffffff;
+            width: 100%;
+            max-width: 820px;
+            max-height: 90vh;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: modalFadeIn 0.2s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-header {
+            background: #0f172a;
+            color: #ffffff;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-close-modal {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.5rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .btn-close-modal:hover {
+            color: #ffffff;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 0.75rem;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 0.65rem 1.1rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        /* Form Controls */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            border-color: var(--primary);
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 0.75rem 1.4rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #475569;
+            border: none;
+            padding: 0.75rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e1;
+        }
+
+        /* Manage Table View */
+        .article-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .article-table th {
+            text-align: left;
+            background: #f1f5f9;
+            padding: 0.75rem 0.9rem;
+            font-weight: 600;
+            color: #475569;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .article-table td {
+            padding: 0.85rem 0.9rem;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        .article-table tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .table-thumb {
+            width: 48px;
+            height: 38px;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .btn-sm-action {
+            padding: 0.3rem 0.6rem;
+            font-size: 0.78rem;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-sm-edit {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .btn-sm-edit:hover {
+            background: #bae6fd;
+        }
+
+        .btn-sm-del {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .btn-sm-del:hover {
+            background: #fecaca;
+        }
+
+        .site-stats-banner {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stats-tile {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stats-tile .num {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stats-tile .label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
         }
 
         /* Footer */
@@ -547,10 +887,16 @@
             font-size: 0.85rem;
         }
 
-        /* Responsive Styles */
+        /* Responsive */
         @media (max-width: 900px) {
             .container {
                 grid-template-columns: 1fr;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-group.full-width {
+                grid-column: span 1;
             }
             .hero h1 {
                 font-size: 2.2rem;
@@ -574,7 +920,7 @@
 </head>
 <body>
 
-    <!-- Foreign Tourist Quick Notice -->
+    <!-- Foreign Tourist Notice -->
     <div class="top-notice">
         🌴 <strong>Visiting Sri Lanka?</strong> ETA tourist visas, scenic trains, and currency exchange guidelines updated for 2026.
     </div>
@@ -587,10 +933,13 @@
             </a>
             <ul class="nav-links">
                 <li><a href="#articles">Destinations</a></li>
-                <li><a href="#itineraries">Itineraries</a></li>
                 <li><a href="#traveler-tips">Foreign Tourist Tips</a></li>
                 <li><a href="#about-akash">About Akash</a></li>
-                <li><a href="#newsletter" class="btn-itinerary">Free Travel Map</a></li>
+                <li>
+                    <button class="btn-admin-nav" onclick="openAdminModal('manage')">
+                        ⚙️ Admin Panel
+                    </button>
+                </li>
             </ul>
         </div>
     </header>
@@ -599,8 +948,8 @@
     <section class="hero">
         <div class="hero-content">
             <span class="hero-badge">Curated Guide for International Travelers</span>
-            <h1>Discover the Wonder of Sri Lanka</h1>
-            <p>From mist-shrouded tea mountains and UNESCO ancient fortresses to golden surf beaches and wildlife safaris. Written with genuine local insight by travel blogger <strong>Akash</strong>.</p>
+            <h1 id="hero-title">Discover the Wonder of Sri Lanka</h1>
+            <p id="hero-subtitle">From mist-shrouded tea mountains and UNESCO ancient fortresses to golden surf beaches and wildlife safaris. Written with genuine local insight by travel blogger <strong>Akash</strong>.</p>
         </div>
     </section>
 
@@ -609,194 +958,65 @@
         <div class="ticker-inner">
             <div class="ticker-item"><span>🌤️</span> <strong>Best Season:</strong> Dec to April (West & South) / May to Sept (East)</div>
             <div class="ticker-item"><span>🚆</span> <strong>Must Experience:</strong> Kandy to Ella Scenic Mountain Train</div>
-            <div class="ticker-item"><span>🍛</span> <strong>Cuisine:</strong> Fresh Seafood & Fragrant Kottu Roti</div>
+            <div class="ticker-item"><span>🍛</span> <strong>Cuisine:</strong> Fresh Seafood & Kottu Roti</div>
             <div class="ticker-item"><span>💳</span> <strong>Currency:</strong> Sri Lankan Rupee (LKR)</div>
         </div>
     </div>
 
-    <!-- Main Content Area -->
+    <!-- Main Container -->
     <main class="container">
         
         <!-- Articles Feed -->
-        <section class="articles-list" id="articles">
-            
-            <!-- Article 1: Sigiriya -->
-            <article class="article-card">
-                <div class="article-img-wrapper">
-                    <span class="article-region">Cultural Triangle</span>
-                    <img src="https://images.unsplash.com/photo-1588598198321-9735fd52455b?auto=format&fit=crop&w=1200&q=80" alt="Sigiriya Rock Fortress" class="article-image">
-                </div>
-                <div class="article-body">
-                    <div class="article-meta">
-                        <span class="badge-cat">UNESCO Heritage</span>
-                        <span>Published by Akash</span>
-                        <span>•</span>
-                        <span>7 min read</span>
-                    </div>
-                    <h2><a href="#" class="article-title">Conquering Sigiriya: The Ultimate Guide to the Ancient Lion Rock Fortress</a></h2>
-                    <p class="article-excerpt">
-                        Rising dramatically 200 meters above emerald jungle plains, Sigiriya is often celebrated as the 8th Wonder of the World. Built by King Kashyapa in the 5th century, it houses ancient frescoes, manicured water gardens, and the colossal lion paws entryway.
-                    </p>
-                    <div class="foreign-traveler-tips">
-                        💡 <strong>Foreign Visitor Tip:</strong> Start your climb at 6:30 AM to beat tropical heat and crowds. Entrance fee for foreigners is approx. $36 USD (card and cash accepted). For stunning photographs of the rock itself, hike adjacent <em>Pidurangala Rock</em> at sunrise.
-                    </div>
-                    <div class="article-footer">
-                        <div class="author-mini">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Akash">
-                            <span>Akash • Travel Writer</span>
-                        </div>
-                        <a href="#" class="read-more">Read full itinerary &rarr;</a>
-                    </div>
-                </div>
-            </article>
+        <section>
+            <div class="feed-header">
+                <h2>Featured Articles & Guides</h2>
+                <div class="article-count-badge" id="article-count-badge">5 Articles</div>
+            </div>
 
-            <!-- Article 2: Ella & Hill Country -->
-            <article class="article-card">
-                <div class="article-img-wrapper">
-                    <span class="article-region">Central Highlands</span>
-                    <img src="https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=1200&q=80" alt="Nine Arch Bridge Ella" class="article-image">
-                </div>
-                <div class="article-body">
-                    <div class="article-meta">
-                        <span class="badge-cat">Scenic Train & Hiking</span>
-                        <span>Published by Akash</span>
-                        <span>•</span>
-                        <span>9 min read</span>
-                    </div>
-                    <h2><a href="#" class="article-title">Ella in the Clouds: Nine Arch Bridge, Tea Estates & Mountain Treks</a></h2>
-                    <p class="article-excerpt">
-                        The blue train ride from Kandy to Ella is hailed globally as one of the most picturesque rail journeys on earth. Wind through rolling green tea valleys, dramatic gorges, and cascading waterfalls before arriving in the relaxed backpacker haven of Ella.
-                    </p>
-                    <div class="foreign-traveler-tips">
-                        💡 <strong>Foreign Visitor Tip:</strong> Book 2nd or 3rd class reserved train tickets online 30 days in advance via Sri Lanka Railways. Arrive at Nine Arch Bridge around 9:15 AM or 11:45 AM to watch the iconic blue locomotive traverse the viaduct.
-                    </div>
-                    <div class="article-footer">
-                        <div class="author-mini">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Akash">
-                            <span>Akash • Travel Writer</span>
-                        </div>
-                        <a href="#" class="read-more">Read full itinerary &rarr;</a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Article 3: Mirissa & Southern Coast -->
-            <article class="article-card">
-                <div class="article-img-wrapper">
-                    <span class="article-region">Southern Coast</span>
-                    <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=1200&q=80" alt="Mirissa Beach Palm Trees" class="article-image">
-                </div>
-                <div class="article-body">
-                    <div class="article-meta">
-                        <span class="badge-cat">Beaches & Marine Life</span>
-                        <span>Published by Akash</span>
-                        <span>•</span>
-                        <span>6 min read</span>
-                    </div>
-                    <h2><a href="#" class="article-title">Mirissa & Weligama: Whale Watching, Coconut Hills & Surf Breaks</a></h2>
-                    <p class="article-excerpt">
-                        The south coast offers a laid-back tropical paradise. Mirissa is renowned as one of the best locations on Earth to spot gigantic Blue Whales and playful spinner dolphins, while neighboring Weligama bay is the ideal spot for beginners to learn to surf.
-                    </p>
-                    <div class="foreign-traveler-tips">
-                        💡 <strong>Foreign Visitor Tip:</strong> Choose ethical whale watching operators that respect marine distance rules. Best season for calm seas and high sighting probability is November through April. Don't miss sunset at Parrot Rock and Coconut Tree Hill!
-                    </div>
-                    <div class="article-footer">
-                        <div class="author-mini">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Akash">
-                            <span>Akash • Travel Writer</span>
-                        </div>
-                        <a href="#" class="read-more">Read full itinerary &rarr;</a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Article 4: Galle Fort -->
-            <article class="article-card">
-                <div class="article-img-wrapper">
-                    <span class="article-region">South-West Heritage</span>
-                    <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80" alt="Galle Fort Lighthouse" class="article-image">
-                </div>
-                <div class="article-body">
-                    <div class="article-meta">
-                        <span class="badge-cat">Colonial Heritage & Cafes</span>
-                        <span>Published by Akash</span>
-                        <span>•</span>
-                        <span>5 min read</span>
-                    </div>
-                    <h2><a href="#" class="article-title">Wandering Galle Fort: Dutch Colonial Charm by the Indian Ocean</a></h2>
-                    <p class="article-excerpt">
-                        Founded by Portuguese colonizers and extensively fortified by the Dutch in the 17th century, Galle Fort is an enchanting pedestrian-friendly citadel. Cobblestone alleyways lined with boutique hotels, jewelers, artisanal gelato parlors, and ocean-facing ramparts make it unmissable.
-                    </p>
-                    <div class="foreign-traveler-tips">
-                        💡 <strong>Foreign Visitor Tip:</strong> Galle is very walkable with zero motor-traffic stress within the fort walls. Stroll along the seaside ramparts around 5:30 PM for spectacular Indian Ocean sunsets right next to the historic Galle Lighthouse.
-                    </div>
-                    <div class="article-footer">
-                        <div class="author-mini">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Akash">
-                            <span>Akash • Travel Writer</span>
-                        </div>
-                        <a href="#" class="read-more">Read full itinerary &rarr;</a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Article 5: Yala Safari -->
-            <article class="article-card">
-                <div class="article-img-wrapper">
-                    <span class="article-region">South-East Wilderness</span>
-                    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1200&q=80" alt="Sri Lankan Leopard Safari" class="article-image">
-                </div>
-                <div class="article-body">
-                    <div class="article-meta">
-                        <span class="badge-cat">Wildlife Safari</span>
-                        <span>Published by Akash</span>
-                        <span>•</span>
-                        <span>8 min read</span>
-                    </div>
-                    <h2><a href="#" class="article-title">Yala National Park Safari: Tracking the Elusive Sri Lankan Leopard</a></h2>
-                    <p class="article-excerpt">
-                        Sri Lanka boasts the highest density of wild leopards in the world, specifically inside Yala Block 1. Experience exhilarating dawn game drives through dry thorn forest, saltwater lagoons with mugger crocodiles, and herds of wild Asian elephants.
-                    </p>
-                    <div class="foreign-traveler-tips">
-                        💡 <strong>Foreign Visitor Tip:</strong> Book private 4x4 safaris with registered naturalist drivers instead of large mixed tour buses. The early 5:00 AM entry offers the greatest odds of spotting solitary leopards perched on massive granite boulders.
-                    </div>
-                    <div class="article-footer">
-                        <div class="author-mini">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Akash">
-                            <span>Akash • Travel Writer</span>
-                        </div>
-                        <a href="#" class="read-more">Read full itinerary &rarr;</a>
-                    </div>
-                </div>
-            </article>
-
+            <!-- Dynamic Article List Container -->
+            <div class="articles-list" id="articles-container">
+                <!-- Rendered dynamically by JavaScript -->
+            </div>
         </section>
 
         <!-- Sidebar -->
         <aside>
+            <!-- Admin Control Launch Widget -->
+            <div class="admin-sidebar-box">
+                <h3>⚙️ Blogger Admin Hub</h3>
+                <p>Welcome Akash! Add new travel stories, modify current guides, or customize header notices anytime.</p>
+                <div style="display: flex; gap: 0.5rem; flex-direction: column;">
+                    <button class="btn-launch-panel" onclick="openAdminModal('create')">
+                        ➕ Publish New Article
+                    </button>
+                    <button class="btn-launch-panel" style="background-color: #334155;" onclick="openAdminModal('manage')">
+                        📋 Manage & Edit Articles
+                    </button>
+                </div>
+            </div>
+
             <!-- Author Card: Akash -->
             <div class="sidebar-widget blogger-card" id="about-akash">
                 <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" alt="Akash Travel Blogger" class="blogger-avatar">
                 <h3 class="blogger-name">Akash</h3>
                 <p class="blogger-role">Sri Lanka Travel Blogger & Guide</p>
                 <p class="blogger-bio">
-                    Ayubowan! I'm Akash, born and raised in Sri Lanka. I write practical, transparent guides to help international travelers experience the genuine beauty, food, and culture of our island safely and unforgettable.
+                    Ayubowan! I'm Akash, born and raised in Sri Lanka. I write practical, transparent guides to help international travelers experience the genuine beauty, food, and culture of our island safely.
                 </p>
                 <div class="blogger-stats">
                     <div class="stat-item">
+                        <div class="stat-number" id="stats-published">5</div>
+                        <div class="stat-label">Published</div>
+                    </div>
+                    <div class="stat-item">
                         <div class="stat-number">25+</div>
-                        <div class="stat-label">Districts Covered</div>
+                        <div class="stat-label">Districts</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number">120k+</div>
-                        <div class="stat-label">Tourists Helped</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">100%</div>
-                        <div class="stat-label">Local Insights</div>
+                        <div class="stat-label">Tourists</div>
                     </div>
                 </div>
-                <a href="#newsletter" style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--primary);">Contact Akash for Custom Routes &rarr;</a>
             </div>
 
             <!-- Quick Guide for Foreign Visitors -->
@@ -805,25 +1025,13 @@
                 <ul class="quick-facts">
                     <li><span>🛂</span> <div><strong>Visa:</strong> Apply for the official online ETA before boarding your flight.</div></li>
                     <li><span>🔌</span> <div><strong>Power Plug:</strong> Type D, G (UK standard 3-pin) and M. 230V / 50Hz.</div></li>
-                    <li><span>📱</span> <div><strong>SIM Card:</strong> Pick up a Dialog or Mobitel tourist eSIM/SIM at Colombo BIA airport arrival.</div></li>
+                    <li><span>📱</span> <div><strong>SIM Card:</strong> Pick up a Dialog or Mobitel tourist eSIM/SIM at Colombo airport arrival.</div></li>
                     <li><span>🛺</span> <div><strong>Taxis:</strong> Use the <em>PickMe</em> or <em>Uber</em> apps in Colombo & Kandy for metered tuk-tuks.</div></li>
                     <li><span>🙏</span> <div><strong>Temple Etiquette:</strong> Cover shoulders and knees; remove shoes and hats before entering.</div></li>
                 </ul>
             </div>
 
-            <!-- Explore By Province -->
-            <div class="sidebar-widget">
-                <h3 class="widget-title">Explore by Region</h3>
-                <ul class="region-links">
-                    <li><a href="#"><span>Central Hill Country (Kandy, Ella, Nuwara Eliya)</span> <span>14</span></a></li>
-                    <li><a href="#"><span>Cultural Triangle (Sigiriya, Dambulla)</span> <span>8</span></a></li>
-                    <li><a href="#"><span>South Coast (Galle, Mirissa, Hiriketiya)</span> <span>16</span></a></li>
-                    <li><a href="#"><span>Wild East (Arugam Bay, Trincomalee)</span> <span>9</span></a></li>
-                    <li><a href="#"><span>National Parks & Safaris (Yala, Udawalawe)</span> <span>6</span></a></li>
-                </ul>
-            </div>
-
-            <!-- Free Travel Map / Newsletter -->
+            <!-- Newsletter -->
             <div class="sidebar-widget" id="newsletter">
                 <h3 class="widget-title">Get Akash's Free 14-Day Route</h3>
                 <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 1rem;">
@@ -832,12 +1040,158 @@
                 <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Ayubowan! Akash will send the 14-day Sri Lanka guide directly to your email.');">
                     <input type="text" placeholder="Your Name" required>
                     <input type="email" placeholder="Your Email Address" required>
-                    <button type="submit">Send Me The Free Guide</button>
+                    <button type="submit">Send Free Route Map</button>
                 </form>
             </div>
         </aside>
 
     </main>
+
+    <!-- ADMIN MODAL / PANEL -->
+    <div class="admin-modal-overlay" id="adminModalOverlay" onclick="handleOverlayClick(event)">
+        <div class="admin-modal">
+            <div class="modal-header">
+                <h3>⚙️ Akash's Blog Control Center</h3>
+                <button class="btn-close-modal" onclick="closeAdminModal()">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <!-- Navigation Tabs -->
+                <div class="admin-tabs">
+                    <button class="tab-btn active" id="tabBtnManage" onclick="switchTab('manage')">Manage Articles</button>
+                    <button class="tab-btn" id="tabBtnEditor" onclick="switchTab('editor')">Add / Edit Article</button>
+                    <button class="tab-btn" id="tabBtnSettings" onclick="switchTab('settings')">Site Controls</button>
+                </div>
+
+                <!-- Tab 1: Manage Articles -->
+                <div id="tabContentManage">
+                    <div class="site-stats-banner">
+                        <div class="stats-tile">
+                            <div class="num" id="modal-total-articles">0</div>
+                            <div class="label">Total Articles</div>
+                        </div>
+                        <div class="stats-tile">
+                            <div class="num">Akash</div>
+                            <div class="label">Primary Author</div>
+                        </div>
+                        <div class="stats-tile">
+                            <div class="num">Active</div>
+                            <div class="label">Site Status</div>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
+                        <h4 style="font-size: 1rem;">All Published Stories</h4>
+                        <button class="btn-primary" style="padding: 0.45rem 0.9rem; font-size: 0.85rem;" onclick="startNewArticle()">+ Add New</button>
+                    </div>
+
+                    <div style="overflow-x:auto;">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Thumbnail</th>
+                                    <th>Title</th>
+                                    <th>Region</th>
+                                    <th>Category</th>
+                                    <th style="text-align: right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminArticlesTableBody">
+                                <!-- Generated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Article Editor (Add / Modify) -->
+                <div id="tabContentEditor" style="display:none;">
+                    <form id="articleForm" onsubmit="handleSaveArticle(event)">
+                        <input type="hidden" id="editArticleId" value="">
+                        
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="artTitle">Article Title *</label>
+                                <input type="text" id="artTitle" placeholder="e.g. Conquering Sigiriya: The Ultimate Guide" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="artRegion">Sri Lankan Region / Province *</label>
+                                <select id="artRegion" required>
+                                    <option value="Cultural Triangle">Cultural Triangle</option>
+                                    <option value="Central Highlands">Central Highlands</option>
+                                    <option value="Southern Coast">Southern Coast</option>
+                                    <option value="South-West Heritage">South-West Heritage</option>
+                                    <option value="South-East Wilderness">South-East Wilderness</option>
+                                    <option value="Eastern Coast">Eastern Coast</option>
+                                    <option value="Northern Province">Northern Province</option>
+                                    <option value="Colombo & Western">Colombo & Western</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="artCategory">Category Badge *</label>
+                                <input type="text" id="artCategory" placeholder="e.g. UNESCO Heritage, Wildlife Safari" required>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="artImage">Image URL *</label>
+                                <input type="url" id="artImage" placeholder="https://images.unsplash.com/..." required>
+                                <small style="color:var(--text-muted); font-size: 0.78rem;">Provide high quality Unsplash or image URL link.</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="artReadTime">Reading Time</label>
+                                <input type="text" id="artReadTime" placeholder="e.g. 7 min read" value="6 min read">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="artAuthor">Author Name</label>
+                                <input type="text" id="artAuthor" value="Akash" required>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="artExcerpt">Story Summary / Content *</label>
+                                <textarea id="artExcerpt" rows="4" placeholder="Write your captivating story, travel tips, and recommendations here..." required></textarea>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="artTips">Foreign Visitor Tip (Highlights & Ticket Advice) *</label>
+                                <textarea id="artTips" rows="3" placeholder="e.g. Entrance fee is $36 USD. Start climbing at 6:30 AM to beat the tropical heat..." required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" onclick="switchTab('manage')">Cancel</button>
+                            <button type="submit" class="btn-primary" id="saveBtnText">Save & Publish Story</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Tab 3: Site Controls -->
+                <div id="tabContentSettings" style="display:none;">
+                    <form onsubmit="handleSaveSiteSettings(event)">
+                        <div class="form-group">
+                            <label for="setNotice">Top Announcement Bar Text</label>
+                            <input type="text" id="setNotice" value="🌴 Visiting Sri Lanka? ETA tourist visas, scenic trains, and currency exchange guidelines updated for 2026.">
+                        </div>
+                        <div class="form-group">
+                            <label for="setHeroTitle">Hero Title</label>
+                            <input type="text" id="setHeroTitle" value="Discover the Wonder of Sri Lanka">
+                        </div>
+                        <div class="form-group">
+                            <label for="setHeroSubtitle">Hero Subtitle</label>
+                            <textarea id="setHeroSubtitle" rows="3">From mist-shrouded tea mountains and UNESCO ancient fortresses to golden surf beaches and wildlife safaris. Written with genuine local insight by travel blogger Akash.</textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" onclick="resetToDefaults()">Reset Default Data</button>
+                            <button type="submit" class="btn-primary">Update Site Content</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -845,7 +1199,7 @@
             <div class="footer-brand">
                 <h3>Ceylon Trails with Akash</h3>
                 <p style="font-size: 0.9rem; line-height: 1.6; max-width: 420px;">
-                    An independent travel portal dedicated to providing international adventurers with honest, authentic, and respectful travel advice across Sri Lanka.
+                    An independent travel portal curated by Akash, dedicated to helping international adventurers explore Sri Lanka safely and respectfully.
                 </p>
             </div>
             <div class="footer-links">
@@ -859,12 +1213,11 @@
                 </ul>
             </div>
             <div class="footer-links">
-                <h4>International Guides</h4>
+                <h4>Admin & Help</h4>
                 <ul>
+                    <li><a href="javascript:void(0)" onclick="openAdminModal('manage')">Open Blogger Admin Panel</a></li>
+                    <li><a href="javascript:void(0)" onclick="openAdminModal('create')">Publish New Destination</a></li>
                     <li><a href="#">Sri Lanka Tourist Visa (ETA)</a></li>
-                    <li><a href="#">Kandy to Ella Train Tickets</a></li>
-                    <li><a href="#">Local Transport & Taxis</a></li>
-                    <li><a href="#">Cultural Etiquette & Dress Codes</a></li>
                 </ul>
             </div>
         </div>
@@ -873,5 +1226,380 @@
         </div>
     </footer>
 
+    <!-- JavaScript Data and Admin Panel Logic -->
+    <script>
+        // Initial articles data specifically for Sri Lanka tourism
+        const DEFAULT_ARTICLES = [
+            {
+                id: "art-1",
+                region: "Cultural Triangle",
+                title: "Conquering Sigiriya: The Ultimate Guide to the Ancient Lion Rock Fortress",
+                category: "UNESCO Heritage",
+                image: "https://images.unsplash.com/photo-1588598198321-9735fd52455b?auto=format&fit=crop&w=1200&q=80",
+                readTime: "7 min read",
+                author: "Akash",
+                date: "October 26, 2026",
+                excerpt: "Rising dramatically 200 meters above emerald jungle plains, Sigiriya is celebrated as the 8th Wonder of the World. Built by King Kashyapa in the 5th century, it houses ancient frescoes, manicured water gardens, and the colossal lion paws entryway.",
+                tips: "Foreign Visitor Tip: Start your climb at 6:30 AM to beat tropical heat and crowds. Entrance fee for foreigners is approx. $36 USD (card and cash accepted). For stunning photographs of the rock itself, hike adjacent Pidurangala Rock at sunrise."
+            },
+            {
+                id: "art-2",
+                region: "Central Highlands",
+                title: "Ella in the Clouds: Nine Arch Bridge, Tea Estates & Mountain Treks",
+                category: "Scenic Train & Hiking",
+                image: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=1200&q=80",
+                readTime: "9 min read",
+                author: "Akash",
+                date: "October 22, 2026",
+                excerpt: "The blue train ride from Kandy to Ella is hailed globally as one of the most picturesque rail journeys on earth. Wind through rolling green tea valleys, dramatic gorges, and cascading waterfalls before arriving in the relaxed backpacker haven of Ella.",
+                tips: "Foreign Visitor Tip: Book 2nd or 3rd class reserved train tickets online 30 days in advance via Sri Lanka Railways. Arrive at Nine Arch Bridge around 9:15 AM or 11:45 AM to watch the iconic blue locomotive traverse the viaduct."
+            },
+            {
+                id: "art-3",
+                region: "Southern Coast",
+                title: "Mirissa & Weligama: Whale Watching, Coconut Hills & Surf Breaks",
+                category: "Beaches & Marine Life",
+                image: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=1200&q=80",
+                readTime: "6 min read",
+                author: "Akash",
+                date: "October 17, 2026",
+                excerpt: "The south coast offers a laid-back tropical paradise. Mirissa is renowned as one of the best locations on Earth to spot gigantic Blue Whales and playful spinner dolphins, while neighboring Weligama bay is the ideal spot for beginners to learn to surf.",
+                tips: "Foreign Visitor Tip: Choose ethical whale watching operators that respect marine distance rules. Best season for calm seas and high sighting probability is November through April. Don't miss sunset at Parrot Rock and Coconut Tree Hill!"
+            },
+            {
+                id: "art-4",
+                region: "South-West Heritage",
+                title: "Wandering Galle Fort: Dutch Colonial Charm by the Indian Ocean",
+                category: "Colonial Heritage & Cafes",
+                image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
+                readTime: "5 min read",
+                author: "Akash",
+                date: "October 12, 2026",
+                excerpt: "Founded by Portuguese colonizers and extensively fortified by the Dutch in the 17th century, Galle Fort is an enchanting pedestrian-friendly citadel. Cobblestone alleyways lined with boutique hotels, jewelers, artisanal gelato parlors, and ocean-facing ramparts make it unmissable.",
+                tips: "Foreign Visitor Tip: Galle is very walkable with zero motor-traffic stress within the fort walls. Stroll along the seaside ramparts around 5:30 PM for spectacular Indian Ocean sunsets right next to the historic Galle Lighthouse."
+            },
+            {
+                id: "art-5",
+                region: "South-East Wilderness",
+                title: "Yala National Park Safari: Tracking the Elusive Sri Lankan Leopard",
+                category: "Wildlife Safari",
+                image: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1200&q=80",
+                readTime: "8 min read",
+                author: "Akash",
+                date: "October 05, 2026",
+                excerpt: "Sri Lanka boasts the highest density of wild leopards in the world, specifically inside Yala Block 1. Experience exhilarating dawn game drives through dry thorn forest, saltwater lagoons with mugger crocodiles, and herds of wild Asian elephants.",
+                tips: "Foreign Visitor Tip: Book private 4x4 safaris with registered naturalist drivers instead of large mixed tour buses. The early 5:00 AM entry offers the greatest odds of spotting solitary leopards perched on massive granite boulders."
+            }
+        ];
+
+        // Storage helpers
+        function loadArticles() {
+            const stored = localStorage.getItem('ceylon_articles');
+            if (stored) {
+                try { return JSON.parse(stored); } catch(e) { }
+            }
+            return DEFAULT_ARTICLES;
+        }
+
+        function saveArticles(articles) {
+            localStorage.setItem('ceylon_articles', JSON.stringify(articles));
+        }
+
+        let articles = loadArticles();
+
+        // Render Articles on the Frontend
+        function renderArticles() {
+            const container = document.getElementById('articles-container');
+            const countBadge = document.getElementById('article-count-badge');
+            const statsPublished = document.getElementById('stats-published');
+            const modalTotal = document.getElementById('modal-total-articles');
+
+            countBadge.innerText = `${articles.length} Articles`;
+            if (statsPublished) statsPublished.innerText = articles.length;
+            if (modalTotal) modalTotal.innerText = articles.length;
+
+            if (articles.length === 0) {
+                container.innerHTML = `
+                    <div style="background:#fff; padding:3rem; text-align:center; border-radius:12px; border:1px solid #e2e8f0;">
+                        <h3>No articles found</h3>
+                        <p style="color:#64748b; margin-top:0.5rem;">Use the Admin Panel to create your first article!</p>
+                        <button class="btn-primary" style="margin-top:1rem;" onclick="openAdminModal('create')">+ Add Article</button>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = articles.map(art => `
+                <article class="article-card" id="${art.id}">
+                    <div class="card-admin-actions">
+                        <button class="btn-card-action" onclick="editArticle('${art.id}')">✏️ Edit</button>
+                        <button class="btn-card-action btn-del" onclick="deleteArticle('${art.id}')">🗑️ Delete</button>
+                    </div>
+
+                    <div class="article-img-wrapper">
+                        <span class="article-region">${escapeHtml(art.region)}</span>
+                        <img src="${escapeHtml(art.image)}" alt="${escapeHtml(art.title)}" class="article-image" onerror="this.src='https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=1200&q=80'">
+                    </div>
+                    
+                    <div class="article-body">
+                        <div class="article-meta">
+                            <span class="badge-cat">${escapeHtml(art.category)}</span>
+                            <span>By ${escapeHtml(art.author || 'Akash')}</span>
+                            <span>•</span>
+                            <span>${escapeHtml(art.readTime || '6 min read')}</span>
+                            <span>•</span>
+                            <span>${escapeHtml(art.date || 'Recent')}</span>
+                        </div>
+                        <h2 class="article-title">${escapeHtml(art.title)}</h2>
+                        <p class="article-excerpt">${escapeHtml(art.excerpt)}</p>
+                        
+                        <div class="foreign-traveler-tips">
+                            💡 <strong>${escapeHtml(art.tips)}</strong>
+                        </div>
+
+                        <div class="article-footer">
+                            <div class="author-mini">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Akash">
+                                <span>${escapeHtml(art.author || 'Akash')} • Travel Writer</span>
+                            </div>
+                            <span class="read-more" onclick="alert('Full guide details for: ${escapeJsString(art.title)}')">Read Full Itinerary &rarr;</span>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+
+            renderAdminTable();
+        }
+
+        // Render Table in Admin Panel
+        function renderAdminTable() {
+            const tbody = document.getElementById('adminArticlesTableBody');
+            if (!tbody) return;
+
+            tbody.innerHTML = articles.map(art => `
+                <tr>
+                    <td>
+                        <img src="${escapeHtml(art.image)}" class="table-thumb" onerror="this.src='https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=100&q=80'">
+                    </td>
+                    <td>
+                        <strong>${escapeHtml(art.title)}</strong><br>
+                        <small style="color:var(--text-muted);">${escapeHtml(art.date || '')}</small>
+                    </td>
+                    <td><span style="font-size:0.85rem;">${escapeHtml(art.region)}</span></td>
+                    <td><span class="badge-cat">${escapeHtml(art.category)}</span></td>
+                    <td style="text-align: right;">
+                        <div class="table-actions" style="justify-content: flex-end;">
+                            <button class="btn-sm-action btn-sm-edit" onclick="editArticle('${art.id}')">Edit</button>
+                            <button class="btn-sm-action btn-sm-del" onclick="deleteArticle('${art.id}')">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Admin Modal Controls
+        function openAdminModal(tab = 'manage') {
+            document.getElementById('adminModalOverlay').style.display = 'flex';
+            if (tab === 'create') {
+                startNewArticle();
+            } else {
+                switchTab(tab);
+            }
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModalOverlay').style.display = 'none';
+        }
+
+        function handleOverlayClick(e) {
+            if (e.target.id === 'adminModalOverlay') {
+                closeAdminModal();
+            }
+        }
+
+        function switchTab(tab) {
+            document.getElementById('tabBtnManage').classList.remove('active');
+            document.getElementById('tabBtnEditor').classList.remove('active');
+            document.getElementById('tabBtnSettings').classList.remove('active');
+
+            document.getElementById('tabContentManage').style.display = 'none';
+            document.getElementById('tabContentEditor').style.display = 'none';
+            document.getElementById('tabContentSettings').style.display = 'none';
+
+            if (tab === 'manage') {
+                document.getElementById('tabBtnManage').classList.add('active');
+                document.getElementById('tabContentManage').style.display = 'block';
+                renderAdminTable();
+            } else if (tab === 'editor') {
+                document.getElementById('tabBtnEditor').classList.add('active');
+                document.getElementById('tabContentEditor').style.display = 'block';
+            } else if (tab === 'settings') {
+                document.getElementById('tabBtnSettings').classList.add('active');
+                document.getElementById('tabContentSettings').style.display = 'block';
+            }
+        }
+
+        // Editor Operations
+        function startNewArticle() {
+            document.getElementById('articleForm').reset();
+            document.getElementById('editArticleId').value = '';
+            document.getElementById('artAuthor').value = 'Akash';
+            document.getElementById('artReadTime').value = '6 min read';
+            document.getElementById('saveBtnText').innerText = 'Save & Publish Story';
+            switchTab('editor');
+        }
+
+        function editArticle(id) {
+            const art = articles.find(a => a.id === id);
+            if (!art) return;
+
+            document.getElementById('editArticleId').value = art.id;
+            document.getElementById('artTitle').value = art.title;
+            document.getElementById('artRegion').value = art.region;
+            document.getElementById('artCategory').value = art.category;
+            document.getElementById('artImage').value = art.image;
+            document.getElementById('artReadTime').value = art.readTime || '6 min read';
+            document.getElementById('artAuthor').value = art.author || 'Akash';
+            document.getElementById('artExcerpt').value = art.excerpt;
+            document.getElementById('artTips').value = art.tips;
+
+            document.getElementById('saveBtnText').innerText = 'Update Article';
+            openAdminModal('editor');
+        }
+
+        function deleteArticle(id) {
+            const art = articles.find(a => a.id === id);
+            if (!art) return;
+
+            if (confirm(`Are you sure you want to remove the article: "${art.title}"?`)) {
+                articles = articles.filter(a => a.id !== id);
+                saveArticles(articles);
+                renderArticles();
+            }
+        }
+
+        function handleSaveArticle(e) {
+            e.preventDefault();
+
+            const editId = document.getElementById('editArticleId').value;
+            const title = document.getElementById('artTitle').value.trim();
+            const region = document.getElementById('artRegion').value;
+            const category = document.getElementById('artCategory').value.trim();
+            const image = document.getElementById('artImage').value.trim();
+            const readTime = document.getElementById('artReadTime').value.trim();
+            const author = document.getElementById('artAuthor').value.trim();
+            const excerpt = document.getElementById('artExcerpt').value.trim();
+            const tips = document.getElementById('artTips').value.trim();
+
+            const currentDate = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+            if (editId) {
+                // Update existing
+                const index = articles.findIndex(a => a.id === editId);
+                if (index !== -1) {
+                    articles[index] = {
+                        ...articles[index],
+                        title,
+                        region,
+                        category,
+                        image,
+                        readTime,
+                        author,
+                        excerpt,
+                        tips
+                    };
+                }
+            } else {
+                // Create new
+                const newArticle = {
+                    id: 'art-' + Date.now(),
+                    title,
+                    region,
+                    category,
+                    image,
+                    readTime,
+                    author,
+                    date: currentDate,
+                    excerpt,
+                    tips
+                };
+                articles.unshift(newArticle);
+            }
+
+            saveArticles(articles);
+            renderArticles();
+            switchTab('manage');
+            alert('Article successfully saved!');
+        }
+
+        function handleSaveSiteSettings(e) {
+            e.preventDefault();
+            const notice = document.getElementById('setNotice').value;
+            const heroTitle = document.getElementById('setHeroTitle').value;
+            const heroSub = document.getElementById('setHeroSubtitle').value;
+
+            document.querySelector('.top-notice').innerHTML = `🌴 <strong>Notice:</strong> ${escapeHtml(notice)}`;
+            document.getElementById('hero-title').innerText = heroTitle;
+            document.getElementById('hero-subtitle').innerText = heroSub;
+
+            localStorage.setItem('ceylon_site_notice', notice);
+            localStorage.setItem('ceylon_site_herotitle', heroTitle);
+            localStorage.setItem('ceylon_site_herosub', heroSub);
+
+            alert('Site controls updated successfully!');
+            closeAdminModal();
+        }
+
+        function loadSiteSettings() {
+            const notice = localStorage.getItem('ceylon_site_notice');
+            const heroTitle = localStorage.getItem('ceylon_site_herotitle');
+            const heroSub = localStorage.getItem('ceylon_site_herosub');
+
+            if (notice) {
+                document.querySelector('.top-notice').innerHTML = `🌴 <strong>Notice:</strong> ${escapeHtml(notice)}`;
+                document.getElementById('setNotice').value = notice;
+            }
+            if (heroTitle) {
+                document.getElementById('hero-title').innerText = heroTitle;
+                document.getElementById('setHeroTitle').value = heroTitle;
+            }
+            if (heroSub) {
+                document.getElementById('hero-subtitle').innerText = heroSub;
+                document.getElementById('setHeroSubtitle').value = heroSub;
+            }
+        }
+
+        function resetToDefaults() {
+            if (confirm("Reset articles and settings back to original defaults?")) {
+                localStorage.removeItem('ceylon_articles');
+                localStorage.removeItem('ceylon_site_notice');
+                localStorage.removeItem('ceylon_site_herotitle');
+                localStorage.removeItem('ceylon_site_herosub');
+                articles = [...DEFAULT_ARTICLES];
+                saveArticles(articles);
+                renderArticles();
+                loadSiteSettings();
+                closeAdminModal();
+            }
+        }
+
+        // Sanitization helpers
+        function escapeHtml(text) {
+            if (!text) return '';
+            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+
+        function escapeJsString(str) {
+            if (!str) return '';
+            return str.replace(/'/g, "\\'");
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderArticles();
+            loadSiteSettings();
+        });
+    </script>
 </body>
 </html>
