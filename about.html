@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Akash | Ceylon Trails - Sri Lanka Travel Blogger</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #047857;
+            --primary-hover: #065f46;
+            --accent: #d97706;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --border-color: #e2e8f0;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Top Bar */
+        .top-notice {
+            background-color: #064e3b;
+            color: #d1fae5;
+            text-align: center;
+            font-size: 0.85rem;
+            padding: 0.45rem 1rem;
+            font-weight: 500;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-white);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-tag {
+            font-size: 0.75rem;
+            background: #ecfdf5;
+            color: var(--primary);
+            padding: 0.15rem 0.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .btn-back-home {
+            background: #f1f5f9;
+            color: var(--text-main);
+            padding: 0.5rem 1.1rem;
+            border-radius: 9999px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.2s;
+        }
+
+        .btn-back-home:hover {
+            background: #e2e8f0;
+            color: var(--primary);
+        }
+
+        /* Hero Profile Banner */
+        .profile-hero {
+            background: linear-gradient(180deg, #064e3b 0%, #0f172a 100%);
+            color: #ffffff;
+            padding: 4.5rem 1.5rem 6.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-hero-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .profile-hero-badge {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            padding: 0.35rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .profile-hero h1 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+        }
+
+        .profile-hero p {
+            font-size: 1.15rem;
+            color: #d1fae5;
+        }
+
+        /* Main Content Container */
+        .profile-container {
+            max-width: 1000px;
+            margin: -4rem auto 4rem;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Bio Header Card */
+        .bio-header-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 2.5rem;
+            align-items: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .bio-avatar-wrapper {
+            text-align: center;
+        }
+
+        .bio-avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #ecfdf5;
+            box-shadow: 0 10px 25px rgba(4, 120, 87, 0.2);
+        }
+
+        .bio-lead-name {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 0.25rem;
+        }
+
+        .bio-lead-role {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .bio-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            margin-top: 1.25rem;
+        }
+
+        .bio-stat-item {
+            text-align: center;
+        }
+
+        .bio-stat-number {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .bio-stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* Story & Mission Section */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2.5rem;
+        }
+
+        .story-section {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .story-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 1.25rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .story-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 45px;
+            height: 3px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
+        .story-section p {
+            margin-bottom: 1.25rem;
+            color: #334155;
+            font-size: 1rem;
+        }
+
+        .highlight-quote {
+            background: #ecfdf5;
+            border-left: 4px solid var(--primary);
+            padding: 1.25rem 1.5rem;
+            border-radius: 8px;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: #064e3b;
+            margin: 1.75rem 0;
+            font-weight: 500;
+        }
+
+        /* Side Info Cards */
+        .side-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+        }
+
+        .info-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-md);
+            padding: 1.75rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .info-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .skills-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            font-size: 0.92rem;
+        }
+
+        .skills-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            color: #475569;
+        }
+
+        .skills-list span.icon {
+            font-size: 1.1rem;
+        }
+
+        .btn-contact {
+            display: block;
+            width: 100%;
+            background: var(--primary);
+            color: #ffffff;
+            text-align: center;
+            padding: 0.85rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            transition: background 0.2s;
+        }
+
+        .btn-contact:hover {
+            background: var(--primary-hover);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0b1320;
+            color: #94a3b8;
+            padding: 3rem 1.5rem 1.5rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 1.5rem;
+        }
+
+        .footer-content h3 {
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 850px) {
+            .bio-header-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .profile-hero h1 {
+                font-size: 2.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Notice -->
+    <div class="top-notice">
+        🇱🇰 Official Author Page • Ceylon Trails Sri Lanka Travel Guide
+    </div>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span>🇱🇰</span> Ceylon Trails <span class="logo-tag">by Akash</span>
+            </a>
+            <a href="index.html" class="btn-back-home">
+                &larr; Back to Travel Stories
+            </a>
+        </div>
+    </header>
+
+    <!-- Profile Hero -->
+    <section class="profile-hero">
+        <div class="profile-hero-content">
+            <span class="profile-hero-badge">Meet The Travel Blogger</span>
+            <h1>Ayubowan! I am Akash</h1>
+            <p>Your local friend, storyteller, and independent guide to experiencing the authentic island of Sri Lanka.</p>
+        </div>
+    </section>
+
+    <!-- Main Profile Container -->
+    <main class="profile-container">
+
+        <!-- Bio Header Card -->
+        <div class="bio-header-card">
+            <div class="bio-avatar-wrapper">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Akash Profile" class="bio-avatar">
+            </div>
+            <div>
+                <h2 class="bio-lead-name">Akash</h2>
+                <p class="bio-lead-role">Sri Lanka Travel Blogger, Cultural Guide & Explorer</p>
+                <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.65;">
+                    Born and raised amidst Sri Lanka’s lush hills and golden coastlines, I founded <em>Ceylon Trails</em> to show international travelers the real island beyond typical tourist brochures—with honest recommendations, fair pricing tips, and deep respect for our cultural heritage.
+                </p>
+                
+                <div class="bio-stats">
+                    <div class="bio-stat-item">
+                        <div class="bio-stat-number">25</div>
+                        <div class="bio-stat-label">Districts Covered</div>
+                    </div>
+                    <div class="bio-stat-item">
+                        <div class="bio-stat-number">120k+</div>
+                        <div class="bio-stat-label">Tourists Assisted</div>
+                    </div>
+                    <div class="bio-stat-item">
+                        <div class="bio-stat-number">100%</div>
+                        <div class="bio-stat-label">Local & Independent</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Grid: Story & Side Info -->
+        <div class="content-grid">
+            
+            <!-- Left: Full Story -->
+            <div class="story-section">
+                <h2>My Story & Mission</h2>
+                
+                <p>
+                    Growing up in Sri Lanka, I spent my childhood exploring ancient ruins in Anuradhapura, listening to the rhythmic chants of temple drummers in Kandy, and watching wild elephants roam freely through national parks.
+                </p>
+
+                <p>
+                    Over the years, as international travelers increasingly discovered Sri Lanka, I noticed many were overwhelmed by confusing train booking systems, inaccurate foreign exchange guidelines, or aggressive tourist traps. I created this blog to be a clear, transparent beacon for anyone visiting our pearl of an island.
+                </p>
+
+                <div class="highlight-quote">
+                    "My mission is simple: to make sure you experience the warmth of Sri Lankan hospitality, enjoy ethical wildlife adventures, and leave our shores with lifelong memories."
+                </div>
+
+                <h2>What I Focus On</h2>
+                <p>
+                    <strong>1. Honest Route Itineraries:</strong> Whether you have 7, 10, or 14 days, I curate balanced routes connecting iconic highlights (like Sigiriya and Ella) with off-the-beaten-path villages.
+                </p>
+                <p>
+                    <strong>2. Cultural Sensitivity:</strong> Practical advice on sacred temple etiquette, traditional dress codes, and respectful photography around monks and Buddhist shrines.
+                </p>
+                <p>
+                    <strong>3. Fair Pricing & Scams Awareness:</strong> Accurate ticket rates for foreigners, metered tuk-tuk apps, and reliable train timetable guidance so you travel stress-free.
+                </p>
+
+                <div style="margin-top: 2rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
+                    <a href="index.html#articles" style="font-weight: 700; color: var(--primary); display: inline-flex; align-items: center; gap: 0.4rem;">
+                        &larr; Explore Akash's Published Articles & Guides
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right: Quick Facts & Contact -->
+            <div class="side-info">
+                
+                <!-- Quick Info -->
+                <div class="info-card">
+                    <h3>At a Glance</h3>
+                    <ul class="skills-list">
+                        <li><span class="icon">📍</span> <span><strong>Based in:</strong> Sri Lanka</span></li>
+                        <li><span class="icon">🗣️</span> <span><strong>Languages:</strong> English, Sinhala</span></li>
+                        <li><span class="icon">☕</span> <span><strong>Favorite Drink:</strong> Pure Ceylon Ginger Tea</span></li>
+                        <li><span class="icon">🚆</span> <span><strong>Top Experience:</strong> Kandy to Ella Scenic Rail</span></li>
+                        <li><span class="icon">🐘</span> <span><strong>Advocacy:</strong> Ethical Wildlife & Eco-tourism</span></li>
+                    </ul>
+                </div>
+
+                <!-- Custom Itinerary Request -->
+                <div class="info-card" style="background: #ecfdf5; border-color: #a7f3d0;">
+                    <h3 style="color: #065f46;">Need Custom Travel Advice?</h3>
+                    <p style="font-size: 0.88rem; color: #047857; margin-bottom: 0.75rem;">
+                        Planning your trip to Sri Lanka and want personalized tips on drivers, hotels, or season timings?
+                    </p>
+                    <a href="mailto:akash@ceylontrails.lk?subject=Sri Lanka Travel Advice Request" class="btn-contact">
+                        ✉️ Send Message to Akash
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3>Ceylon Trails with Akash</h3>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Connecting international travelers to the soul of Sri Lanka.</p>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Ceylon Trails. Authored by Akash. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
