@@ -1209,6 +1209,7 @@
                     <li><a href="#">Ella & Nine Arch Bridge</a></li>
                     <li><a href="#">Galle Fort Walk</a></li>
                     <li><a href="#">Mirissa Whale Watching</a></li>
+                    <li><a href="#">Kandy Esala Perahera</a></li>
                     <li><a href="#">Yala Safari Expeditions</a></li>
                 </ul>
             </div>
@@ -1279,6 +1280,18 @@
                 tips: "Foreign Visitor Tip: Galle is very walkable with zero motor-traffic stress within the fort walls. Stroll along the seaside ramparts around 5:30 PM for spectacular Indian Ocean sunsets right next to the historic Galle Lighthouse."
             },
             {
+                id: "art-6",
+                region: "Central Highlands",
+                title: "The Grand Kandy Esala Perahera: Asia's Most Spectacular Festival of Lights & Drums",
+                category: "Cultural Festival",
+                image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=80",
+                readTime: "8 min read",
+                author: "Akash",
+                date: "October 28, 2026",
+                excerpt: "Every July/August, the sacred hill capital of Kandy comes alive with the historic Esala Perahera. Honoring the Sacred Tooth Relic of Lord Buddha, this centuries-old ritual features thunderous traditional drummers, hypnotic fire-dancers, whip-crackers, and the revered, ornately adorned Maligawa Tusker marching through torch-lit streets.",
+                tips: "Foreign Visitor Tip: The festival runs for 10 nights (culminating in the grand Randoli Perahera). Streets fill up by 2:00 PM; pre-book a balcony seat or storefront viewing ticket along Dalada Veediya weeks in advance. Remember to wear modest white or light-colored attire covering shoulders and legs."
+            },
+            {
                 id: "art-5",
                 region: "South-East Wilderness",
                 title: "Yala National Park Safari: Tracking the Elusive Sri Lankan Leopard",
@@ -1296,7 +1309,24 @@
         function loadArticles() {
             const stored = localStorage.getItem('ceylon_articles');
             if (stored) {
-                try { return JSON.parse(stored); } catch(e) { }
+                try {
+                    const parsed = JSON.parse(stored);
+                    // Ensure the new Kandy Perahera article exists in stored list if it's not already there
+                    const hasKandy = parsed.some(a => a.id === 'art-6' || a.title.toLowerCase().includes('kandy'));
+                    if (!hasKandy) {
+                        const kandyArt = DEFAULT_ARTICLES.find(a => a.id === 'art-6');
+                        if (kandyArt) {
+                            // Insert before the last article (Yala Safari)
+                            if (parsed.length > 0) {
+                                parsed.splice(parsed.length - 1, 0, kandyArt);
+                            } else {
+                                parsed.push(kandyArt);
+                            }
+                            saveArticles(parsed);
+                        }
+                    }
+                    return parsed;
+                } catch(e) { }
             }
             return DEFAULT_ARTICLES;
         }
