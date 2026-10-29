@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ceylon Trails | Sri Lanka Travel Guide by Akash</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
-            --primary: #047857;          /* Tropical green */
+            --primary: #047857;
+            /* Tropical green */
             --primary-hover: #065f46;
-            --accent: #d97706;           /* Ceylon amber */
+            --accent: #d97706;
+            /* Ceylon amber */
             --danger: #ef4444;
             --text-main: #1e293b;
             --text-muted: #64748b;
@@ -20,9 +24,9 @@
             --border-color: #e2e8f0;
             --radius-md: 12px;
             --radius-lg: 16px;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
-            --shadow-hover: 0 12px 20px -3px rgba(0,0,0,0.09), 0 4px 6px -4px rgba(0,0,0,0.04);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 12px 20px -3px rgba(0, 0, 0, 0.09), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
         }
 
         * {
@@ -129,8 +133,8 @@
 
         /* Hero Banner */
         .hero {
-            background: linear-gradient(180deg, rgba(4, 120, 87, 0.84) 0%, rgba(15, 23, 42, 0.9) 100%), 
-                        url('https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            background: linear-gradient(180deg, rgba(4, 120, 87, 0.84) 0%, rgba(15, 23, 42, 0.9) 100%),
+                url('https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
             color: #ffffff;
             padding: 5rem 1.5rem;
             text-align: center;
@@ -298,7 +302,7 @@
             font-weight: 600;
             cursor: pointer;
             backdrop-filter: blur(4px);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
             transition: background 0.2s;
         }
 
@@ -309,6 +313,7 @@
         .btn-card-action.btn-del {
             color: var(--danger);
         }
+
         .btn-card-action.btn-del:hover {
             background: #fee2e2;
         }
@@ -392,6 +397,184 @@
             font-weight: 600;
             font-size: 0.92rem;
             cursor: pointer;
+        }
+
+        /* Article Interactive Section (Like & Comments) */
+        .article-interactions {
+            margin-top: 1.25rem;
+            border-top: 1px dashed var(--border-color);
+            padding-top: 1rem;
+        }
+
+        .like-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.85rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .btn-like {
+            background: #fff1f2;
+            color: #e11d48;
+            border: 1px solid #fecdd3;
+            padding: 0.45rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .btn-like:hover {
+            background: #ffe4e6;
+            transform: scale(1.05);
+        }
+
+        .btn-like:active {
+            transform: scale(0.95);
+        }
+
+        /* 10-Second Floating Heart Banner */
+        .heart-celebration-toast {
+            display: none;
+            background: linear-gradient(135deg, #ff4d6d, #c9184a);
+            color: #ffffff;
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            box-shadow: 0 10px 20px rgba(201, 24, 74, 0.25);
+            animation: pulseGlow 1.5s infinite alternate;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
+        }
+
+        @keyframes pulseGlow {
+            from { box-shadow: 0 4px 12px rgba(201, 24, 74, 0.3); }
+            to { box-shadow: 0 8px 24px rgba(255, 77, 109, 0.6); }
+        }
+
+        .floating-heart-span {
+            font-size: 1.4rem;
+            display: inline-block;
+            animation: heartBeat 0.8s infinite;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
+        /* Comment Section */
+        .comments-wrapper {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            margin-top: 0.75rem;
+        }
+
+        .comments-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--text-main);
+        }
+
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+            max-height: 220px;
+            overflow-y: auto;
+            margin-bottom: 0.85rem;
+            padding-right: 0.25rem;
+        }
+
+        .comment-item {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.65rem 0.85rem;
+            font-size: 0.86rem;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.25rem;
+        }
+
+        .comment-author {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .comment-time {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .comment-body {
+            color: #334155;
+            line-height: 1.45;
+            word-break: break-word;
+        }
+
+        .comment-input-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .comment-row {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .comment-name-input {
+            width: 150px;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-family: inherit;
+        }
+
+        .comment-text-input {
+            flex: 1;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-family: inherit;
+        }
+
+        .btn-comment-submit {
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-comment-submit:hover {
+            background: var(--primary-hover);
         }
 
         /* Sidebar */
@@ -604,8 +787,15 @@
         }
 
         @keyframes modalFadeIn {
-            from { opacity: 0; transform: scale(0.96); }
-            to { opacity: 1; transform: scale(1); }
+            from {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .modal-header {
@@ -691,8 +881,8 @@
             color: var(--text-main);
         }
 
-        .form-group input, 
-        .form-group select, 
+        .form-group input,
+        .form-group select,
         .form-group textarea {
             padding: 0.75rem;
             border: 1px solid var(--border-color);
@@ -703,8 +893,8 @@
             transition: border-color 0.2s;
         }
 
-        .form-group input:focus, 
-        .form-group select:focus, 
+        .form-group input:focus,
+        .form-group select:focus,
         .form-group textarea:focus {
             border-color: var(--primary);
         }
@@ -892,15 +1082,19 @@
             .container {
                 grid-template-columns: 1fr;
             }
+
             .form-grid {
                 grid-template-columns: 1fr;
             }
+
             .form-group.full-width {
                 grid-column: span 1;
             }
+
             .hero h1 {
                 font-size: 2.2rem;
             }
+
             .footer-content {
                 grid-template-columns: 1fr;
             }
@@ -910,6 +1104,7 @@
             .nav-links {
                 display: none;
             }
+
             .ticker-inner {
                 flex-direction: column;
                 align-items: center;
@@ -918,11 +1113,13 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- Foreign Tourist Notice -->
     <div class="top-notice">
-        🌴 <strong>Visiting Sri Lanka?</strong> ETA tourist visas, scenic trains, and currency exchange guidelines updated for 2026.
+        🌴 <strong>Visiting Sri Lanka?</strong> ETA tourist visas, scenic trains, and currency exchange guidelines
+        updated for 2026.
     </div>
 
     <!-- Header Navigation -->
@@ -949,15 +1146,18 @@
         <div class="hero-content">
             <span class="hero-badge">Curated Guide for International Travelers</span>
             <h1 id="hero-title">Discover the Wonder of Sri Lanka</h1>
-            <p id="hero-subtitle">From mist-shrouded tea mountains and UNESCO ancient fortresses to golden surf beaches and wildlife safaris. Written with genuine local insight by travel blogger <strong>Akash</strong>.</p>
+            <p id="hero-subtitle">From mist-shrouded tea mountains and UNESCO ancient fortresses to golden surf beaches
+                and wildlife safaris. Written with genuine local insight by travel blogger <strong>Akash</strong>.</p>
         </div>
     </section>
 
     <!-- Travel Ticker -->
     <div class="travel-ticker">
         <div class="ticker-inner">
-            <div class="ticker-item"><span>🌤️</span> <strong>Best Season:</strong> Dec to April (West & South) / May to Sept (East)</div>
-            <div class="ticker-item"><span>🚆</span> <strong>Must Experience:</strong> Kandy to Ella Scenic Mountain Train</div>
+            <div class="ticker-item"><span>🌤️</span> <strong>Best Season:</strong> Dec to April (West & South) / May to
+                Sept (East)</div>
+            <div class="ticker-item"><span>🚆</span> <strong>Must Experience:</strong> Kandy to Ella Scenic Mountain
+                Train</div>
             <div class="ticker-item"><span>🍛</span> <strong>Cuisine:</strong> Fresh Seafood & Kottu Roti</div>
             <div class="ticker-item"><span>💳</span> <strong>Currency:</strong> Sri Lankan Rupee (LKR)</div>
         </div>
@@ -965,7 +1165,7 @@
 
     <!-- Main Container -->
     <main class="container">
-        
+
         <!-- Articles Feed -->
         <section>
             <div class="feed-header">
@@ -984,12 +1184,14 @@
             <!-- Admin Control Launch Widget -->
             <div class="admin-sidebar-box">
                 <h3>⚙️ Blogger Admin Hub</h3>
-                <p>Welcome Akash! Add new travel stories, modify current guides, or customize header notices anytime.</p>
+                <p>Welcome Akash! Add new travel stories, modify current guides, or customize header notices anytime.
+                </p>
                 <div style="display: flex; gap: 0.5rem; flex-direction: column;">
                     <button class="btn-launch-panel" onclick="openAdminModal('create')">
                         ➕ Publish New Article
                     </button>
-                    <button class="btn-launch-panel" style="background-color: #334155;" onclick="openAdminModal('manage')">
+                    <button class="btn-launch-panel" style="background-color: #334155;"
+                        onclick="openAdminModal('manage')">
                         📋 Manage & Edit Articles
                     </button>
                 </div>
@@ -998,12 +1200,15 @@
             <!-- Author Card: Akash -->
             <div class="sidebar-widget blogger-card" id="about-akash">
                 <a href="about.html" title="Click to view Akash's full profile page">
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Akash Travel Blogger" class="blogger-avatar" style="transition: transform 0.2s; cursor: pointer;">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"
+                        alt="Akash Travel Blogger" class="blogger-avatar"
+                        style="transition: transform 0.2s; cursor: pointer;">
                     <h3 class="blogger-name" style="transition: color 0.2s;">Akash</h3>
                 </a>
                 <p class="blogger-role">Sri Lanka Travel Blogger & Guide</p>
                 <p class="blogger-bio">
-                    Ayubowan! I'm Akash, born and raised in Sri Lanka. I write practical, transparent guides to help international travelers experience the genuine beauty, food, and culture of our island safely.
+                    Ayubowan! I'm Akash, born and raised in Sri Lanka. I write practical, transparent guides to help
+                    international travelers experience the genuine beauty, food, and culture of our island safely.
                 </p>
                 <div class="blogger-stats">
                     <div class="stat-item">
@@ -1019,7 +1224,8 @@
                         <div class="stat-label">Tourists</div>
                     </div>
                 </div>
-                <a href="about.html" style="display: inline-block; font-size: 0.88rem; font-weight: 700; color: var(--primary); margin-top: 0.5rem;">
+                <a href="about.html"
+                    style="display: inline-block; font-size: 0.88rem; font-weight: 700; color: var(--primary); margin-top: 0.5rem;">
                     Read Full Story & About Akash &rarr;
                 </a>
             </div>
@@ -1028,11 +1234,24 @@
             <div class="sidebar-widget" id="traveler-tips">
                 <h3 class="widget-title">Traveler Cheat-Sheet</h3>
                 <ul class="quick-facts">
-                    <li><span>🛂</span> <div><strong>Visa:</strong> Apply for the official online ETA before boarding your flight.</div></li>
-                    <li><span>🔌</span> <div><strong>Power Plug:</strong> Type D, G (UK standard 3-pin) and M. 230V / 50Hz.</div></li>
-                    <li><span>📱</span> <div><strong>SIM Card:</strong> Pick up a Dialog or Mobitel tourist eSIM/SIM at Colombo airport arrival.</div></li>
-                    <li><span>🛺</span> <div><strong>Taxis:</strong> Use the <em>PickMe</em> or <em>Uber</em> apps in Colombo & Kandy for metered tuk-tuks.</div></li>
-                    <li><span>🙏</span> <div><strong>Temple Etiquette:</strong> Cover shoulders and knees; remove shoes and hats before entering.</div></li>
+                    <li><span>🛂</span>
+                        <div><strong>Visa:</strong> Apply for the official online ETA before boarding your flight.</div>
+                    </li>
+                    <li><span>🔌</span>
+                        <div><strong>Power Plug:</strong> Type D, G (UK standard 3-pin) and M. 230V / 50Hz.</div>
+                    </li>
+                    <li><span>📱</span>
+                        <div><strong>SIM Card:</strong> Pick up a Dialog or Mobitel tourist eSIM/SIM at Colombo airport
+                            arrival.</div>
+                    </li>
+                    <li><span>🛺</span>
+                        <div><strong>Taxis:</strong> Use the <em>PickMe</em> or <em>Uber</em> apps in Colombo & Kandy
+                            for metered tuk-tuks.</div>
+                    </li>
+                    <li><span>🙏</span>
+                        <div><strong>Temple Etiquette:</strong> Cover shoulders and knees; remove shoes and hats before
+                            entering.</div>
+                    </li>
                 </ul>
             </div>
 
@@ -1040,9 +1259,11 @@
             <div class="sidebar-widget" id="newsletter">
                 <h3 class="widget-title">Get Akash's Free 14-Day Route</h3>
                 <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 1rem;">
-                    Download my free PDF itinerary with driver contacts, hidden gems, and train schedules for foreign travelers.
+                    Download my free PDF itinerary with driver contacts, hidden gems, and train schedules for foreign
+                    travelers.
                 </p>
-                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Ayubowan! Akash will send the 14-day Sri Lanka guide directly to your email.');">
+                <form class="newsletter-form"
+                    onsubmit="event.preventDefault(); alert('Ayubowan! Akash will send the 14-day Sri Lanka guide directly to your email.');">
                     <input type="text" placeholder="Your Name" required>
                     <input type="email" placeholder="Your Email Address" required>
                     <button type="submit">Send Free Route Map</button>
@@ -1063,7 +1284,8 @@
             <div class="modal-body">
                 <!-- Navigation Tabs -->
                 <div class="admin-tabs">
-                    <button class="tab-btn active" id="tabBtnManage" onclick="switchTab('manage')">Manage Articles</button>
+                    <button class="tab-btn active" id="tabBtnManage" onclick="switchTab('manage')">Manage
+                        Articles</button>
                     <button class="tab-btn" id="tabBtnEditor" onclick="switchTab('editor')">Add / Edit Article</button>
                     <button class="tab-btn" id="tabBtnSettings" onclick="switchTab('settings')">Site Controls</button>
                 </div>
@@ -1087,7 +1309,8 @@
 
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
                         <h4 style="font-size: 1rem;">All Published Stories</h4>
-                        <button class="btn-primary" style="padding: 0.45rem 0.9rem; font-size: 0.85rem;" onclick="startNewArticle()">+ Add New</button>
+                        <button class="btn-primary" style="padding: 0.45rem 0.9rem; font-size: 0.85rem;"
+                            onclick="startNewArticle()">+ Add New</button>
                     </div>
 
                     <div style="overflow-x:auto;">
@@ -1112,11 +1335,12 @@
                 <div id="tabContentEditor" style="display:none;">
                     <form id="articleForm" onsubmit="handleSaveArticle(event)">
                         <input type="hidden" id="editArticleId" value="">
-                        
+
                         <div class="form-grid">
                             <div class="form-group full-width">
                                 <label for="artTitle">Article Title *</label>
-                                <input type="text" id="artTitle" placeholder="e.g. Conquering Sigiriya: The Ultimate Guide" required>
+                                <input type="text" id="artTitle"
+                                    placeholder="e.g. Conquering Sigiriya: The Ultimate Guide" required>
                             </div>
 
                             <div class="form-group">
@@ -1135,13 +1359,15 @@
 
                             <div class="form-group">
                                 <label for="artCategory">Category Badge *</label>
-                                <input type="text" id="artCategory" placeholder="e.g. UNESCO Heritage, Wildlife Safari" required>
+                                <input type="text" id="artCategory" placeholder="e.g. UNESCO Heritage, Wildlife Safari"
+                                    required>
                             </div>
 
                             <div class="form-group full-width">
                                 <label for="artImage">Image URL *</label>
                                 <input type="url" id="artImage" placeholder="https://images.unsplash.com/..." required>
-                                <small style="color:var(--text-muted); font-size: 0.78rem;">Provide high quality Unsplash or image URL link.</small>
+                                <small style="color:var(--text-muted); font-size: 0.78rem;">Provide high quality
+                                    Unsplash or image URL link.</small>
                             </div>
 
                             <div class="form-group">
@@ -1156,12 +1382,16 @@
 
                             <div class="form-group full-width">
                                 <label for="artExcerpt">Story Summary / Content *</label>
-                                <textarea id="artExcerpt" rows="4" placeholder="Write your captivating story, travel tips, and recommendations here..." required></textarea>
+                                <textarea id="artExcerpt" rows="4"
+                                    placeholder="Write your captivating story, travel tips, and recommendations here..."
+                                    required></textarea>
                             </div>
 
                             <div class="form-group full-width">
                                 <label for="artTips">Foreign Visitor Tip (Highlights & Ticket Advice) *</label>
-                                <textarea id="artTips" rows="3" placeholder="e.g. Entrance fee is $36 USD. Start climbing at 6:30 AM to beat the tropical heat..." required></textarea>
+                                <textarea id="artTips" rows="3"
+                                    placeholder="e.g. Entrance fee is $36 USD. Start climbing at 6:30 AM to beat the tropical heat..."
+                                    required></textarea>
                             </div>
                         </div>
 
@@ -1177,7 +1407,8 @@
                     <form onsubmit="handleSaveSiteSettings(event)">
                         <div class="form-group">
                             <label for="setNotice">Top Announcement Bar Text</label>
-                            <input type="text" id="setNotice" value="🌴 Visiting Sri Lanka? ETA tourist visas, scenic trains, and currency exchange guidelines updated for 2026.">
+                            <input type="text" id="setNotice"
+                                value="🌴 Visiting Sri Lanka? ETA tourist visas, scenic trains, and currency exchange guidelines updated for 2026.">
                         </div>
                         <div class="form-group">
                             <label for="setHeroTitle">Hero Title</label>
@@ -1185,10 +1416,12 @@
                         </div>
                         <div class="form-group">
                             <label for="setHeroSubtitle">Hero Subtitle</label>
-                            <textarea id="setHeroSubtitle" rows="3">From mist-shrouded tea mountains and UNESCO ancient fortresses to golden surf beaches and wildlife safaris. Written with genuine local insight by travel blogger Akash.</textarea>
+                            <textarea id="setHeroSubtitle"
+                                rows="3">From mist-shrouded tea mountains and UNESCO ancient fortresses to golden surf beaches and wildlife safaris. Written with genuine local insight by travel blogger Akash.</textarea>
                         </div>
                         <div class="form-actions">
-                            <button type="button" class="btn-secondary" onclick="resetToDefaults()">Reset Default Data</button>
+                            <button type="button" class="btn-secondary" onclick="resetToDefaults()">Reset Default
+                                Data</button>
                             <button type="submit" class="btn-primary">Update Site Content</button>
                         </div>
                     </form>
@@ -1204,7 +1437,8 @@
             <div class="footer-brand">
                 <h3>Ceylon Trails with Akash</h3>
                 <p style="font-size: 0.9rem; line-height: 1.6; max-width: 420px;">
-                    An independent travel portal curated by Akash, dedicated to helping international adventurers explore Sri Lanka safely and respectfully.
+                    An independent travel portal curated by Akash, dedicated to helping international adventurers
+                    explore Sri Lanka safely and respectfully.
                 </p>
             </div>
             <div class="footer-links">
@@ -1222,7 +1456,8 @@
             <div class="footer-links">
                 <h4>Admin & Help</h4>
                 <ul>
-                    <li><a href="javascript:void(0)" onclick="openAdminModal('manage')">Open Blogger Admin Panel</a></li>
+                    <li><a href="javascript:void(0)" onclick="openAdminModal('manage')">Open Blogger Admin Panel</a>
+                    </li>
                     <li><a href="javascript:void(0)" onclick="openAdminModal('create')">Publish New Destination</a></li>
                     <li><a href="#">Sri Lanka Tourist Visa (ETA)</a></li>
                 </ul>
@@ -1237,6 +1472,18 @@
     <script>
         // Initial articles data specifically for Sri Lanka tourism
         const DEFAULT_ARTICLES = [
+            {
+                id: "art-nimani",
+                region: "My Heart & Soul",
+                title: "To My Love Nimani: You Are My Entire World & Endless Journey",
+                category: "Pure Love & Dedication",
+                image: "nimani.jpg",
+                readTime: "Infinite read",
+                author: "Akash",
+                date: "October 29, 2026",
+                excerpt: "In all my journeys across Sri Lanka and the wide world, nothing compares to the light you bring into my life. Nimani, you are my heart, my peace, and my sweetest home. Every mountain sunrise, every ocean wave, and every breath I take reminds me how deeply and endlessly I love you. You are my world, today, tomorrow, and forever.",
+                tips: "Akash's Message: Nimani, loving you more with every passing second! Visitors, touch the Like heart below or leave your lovely comments for Nimani and Akash!"
+            },
             {
                 id: "art-7",
                 region: "Central Highlands",
@@ -1329,20 +1576,32 @@
             if (stored) {
                 try {
                     let parsed = JSON.parse(stored);
-                    
-                    // 1. Ensure University article is placed at the top (first position)
+
+                    // 0. Ensure Nimani love article is always at the very top (index 0)
+                    const nimaniArt = DEFAULT_ARTICLES.find(a => a.id === 'art-nimani');
+                    if (nimaniArt) {
+                        const existingNimaniIdx = parsed.findIndex(a => a.id === 'art-nimani' || a.title.toLowerCase().includes('nimani'));
+                        if (existingNimaniIdx !== -1) {
+                            if (existingNimaniIdx !== 0) {
+                                const [existing] = parsed.splice(existingNimaniIdx, 1);
+                                parsed.unshift(existing);
+                            }
+                        } else {
+                            parsed.unshift(nimaniArt);
+                        }
+                    }
+
+                    // 1. Ensure University article is placed right after Nimani
                     const universityArt = DEFAULT_ARTICLES.find(a => a.id === 'art-7');
                     if (universityArt) {
                         const existingIdx = parsed.findIndex(a => a.id === 'art-7' || a.title.toLowerCase().includes('peradeniya'));
                         if (existingIdx !== -1) {
-                            // Move to top if not already at index 0
-                            if (existingIdx !== 0) {
+                            if (existingIdx !== 1) {
                                 const [existing] = parsed.splice(existingIdx, 1);
-                                parsed.unshift(existing);
+                                parsed.splice(1, 0, existing);
                             }
                         } else {
-                            // Insert at top
-                            parsed.unshift(universityArt);
+                            parsed.splice(1, 0, universityArt);
                         }
                     }
 
@@ -1351,7 +1610,6 @@
                     if (!hasKandy) {
                         const kandyArt = DEFAULT_ARTICLES.find(a => a.id === 'art-6');
                         if (kandyArt) {
-                            // Insert before the last article
                             if (parsed.length > 0) {
                                 parsed.splice(parsed.length - 1, 0, kandyArt);
                             } else {
@@ -1362,7 +1620,7 @@
 
                     saveArticles(parsed);
                     return parsed;
-                } catch(e) { }
+                } catch (e) { }
             }
             return DEFAULT_ARTICLES;
         }
@@ -1429,6 +1687,49 @@
                                 <span>${escapeHtml(art.author || 'Akash')} • Travel Writer</span>
                             </a>
                             <span class="read-more" onclick="alert('Full guide details for: ${escapeJsString(art.title)}')">Read Full Itinerary &rarr;</span>
+                        </div>
+
+                        <!-- 10-Second Heart Animation Toast -->
+                        <div id="heart-toast-${art.id}" class="heart-celebration-toast">
+                            <span class="floating-heart-span">💖</span> 
+                            <span>Akash loves Nimani so much! You sent love to Nimani!</span> 
+                            <span class="floating-heart-span">❤️</span>
+                            <div style="font-size:0.78rem; opacity:0.9; margin-top:2px;">(Heart love effect active for 10 seconds!)</div>
+                        </div>
+
+                        <!-- Interaction: Like Button & Comments -->
+                        <div class="article-interactions">
+                            <div class="like-bar">
+                                <button class="btn-like" onclick="triggerLike('${art.id}')">
+                                    <span id="like-icon-${art.id}">❤️</span> 
+                                    <span>Like</span> 
+                                    <span id="like-count-${art.id}" style="background:rgba(225,29,72,0.15); padding:1px 6px; border-radius:999px; margin-left:4px;">
+                                        ${getLikeCount(art.id)}
+                                    </span>
+                                </button>
+                                <span style="font-size:0.82rem; color:var(--text-muted);">
+                                    💬 <span id="comment-count-${art.id}">${getComments(art.id).length}</span> Comments
+                                </span>
+                            </div>
+
+                            <!-- Comment Section for Visitors -->
+                            <div class="comments-wrapper">
+                                <div class="comments-title">
+                                    <span>💬 Visitors Comments</span>
+                                </div>
+
+                                <div class="comments-list" id="comments-list-${art.id}">
+                                    ${renderCommentsHtml(art.id)}
+                                </div>
+
+                                <form class="comment-input-form" onsubmit="handleAddComment(event, '${art.id}')">
+                                    <div class="comment-row">
+                                        <input type="text" class="comment-name-input" id="c-name-${art.id}" placeholder="Your Name" required>
+                                        <input type="text" class="comment-text-input" id="c-text-${art.id}" placeholder="Write a comment or warm wishes..." required>
+                                        <button type="submit" class="btn-comment-submit">Post</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </article>
@@ -1661,6 +1962,108 @@
             return str.replace(/'/g, "\\'");
         }
 
+        // --- Interaction: Likes & 10-Second Heart Animation ---
+        function getLikesData() {
+            try {
+                return JSON.parse(localStorage.getItem('ceylon_likes') || '{}');
+            } catch(e) { return {}; }
+        }
+
+        function getLikeCount(artId) {
+            const likes = getLikesData();
+            return likes[artId] || 0;
+        }
+
+        function triggerLike(artId) {
+            const likes = getLikesData();
+            likes[artId] = (likes[artId] || 0) + 1;
+            localStorage.setItem('ceylon_likes', JSON.stringify(likes));
+
+            // Update badge text
+            const countEl = document.getElementById(`like-count-${artId}`);
+            if (countEl) countEl.innerText = likes[artId];
+
+            // Show 10-Second Floating Heart Banner
+            const toast = document.getElementById(`heart-toast-${artId}`);
+            if (toast) {
+                toast.style.display = 'block';
+                // Reset any existing timeout
+                if (toast._timer) clearTimeout(toast._timer);
+                toast._timer = setTimeout(() => {
+                    toast.style.display = 'none';
+                }, 10000); // exactly 10 seconds
+            }
+        }
+
+        // --- Interaction: Comments System ---
+        function getCommentsData() {
+            try {
+                return JSON.parse(localStorage.getItem('ceylon_comments') || '{}');
+            } catch(e) { return {}; }
+        }
+
+        function getComments(artId) {
+            const data = getCommentsData();
+            if (data[artId]) return data[artId];
+            
+            // Seed a sweet initial comment for Nimani article
+            if (artId === 'art-nimani') {
+                return [
+                    { name: "Akash", text: "You are the love of my life, Nimani! Forever and always ❤️", time: "Just now" },
+                    { name: "Traveler Sophia", text: "Such a beautiful tribute! Best wishes to both of you from Germany! ✨", time: "1 hour ago" }
+                ];
+            }
+            return [];
+        }
+
+        function saveComments(artId, comments) {
+            const data = getCommentsData();
+            data[artId] = comments;
+            localStorage.setItem('ceylon_comments', JSON.stringify(data));
+        }
+
+        function renderCommentsHtml(artId) {
+            const comments = getComments(artId);
+            if (!comments || comments.length === 0) {
+                return `<div style="color:var(--text-muted); font-size:0.83rem; font-style:italic;">No comments yet. Be the first visitor to write something!</div>`;
+            }
+            return comments.map(c => `
+                <div class="comment-item">
+                    <div class="comment-header">
+                        <span class="comment-author">${escapeHtml(c.name)}</span>
+                        <span class="comment-time">${escapeHtml(c.time)}</span>
+                    </div>
+                    <div class="comment-body">${escapeHtml(c.text)}</div>
+                </div>
+            `).join('');
+        }
+
+        function handleAddComment(e, artId) {
+            e.preventDefault();
+            const nameInput = document.getElementById(`c-name-${artId}`);
+            const textInput = document.getElementById(`c-text-${artId}`);
+            const name = nameInput.value.trim();
+            const text = textInput.value.trim();
+
+            if (!name || !text) return;
+
+            const comments = getComments(artId);
+            const nowTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            comments.unshift({ name, text, time: nowTime });
+            saveComments(artId, comments);
+
+            // Re-render comments container
+            const container = document.getElementById(`comments-list-${artId}`);
+            if (container) container.innerHTML = renderCommentsHtml(artId);
+
+            // Update comment count
+            const countEl = document.getElementById(`comment-count-${artId}`);
+            if (countEl) countEl.innerText = comments.length;
+
+            nameInput.value = '';
+            textInput.value = '';
+        }
+
         // Initialize on page load
         window.addEventListener('DOMContentLoaded', () => {
             renderArticles();
@@ -1668,4 +2071,5 @@
         });
     </script>
 </body>
+
 </html>
