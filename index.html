@@ -2169,14 +2169,48 @@
             const data = getCommentsData();
             if (data[artId]) return data[artId];
             
-            // Seed a sweet initial comment for Nimani article
-            if (artId === 'art-nimani') {
-                return [
-                    { name: "Akash", text: "You are the love of my life, Nimani! Forever and always ❤️", time: "Just now" },
-                    { name: "Traveler Sophia", text: "Such a beautiful tribute! Best wishes to both of you from Germany! ✨", time: "1 hour ago" }
-                ];
-            }
-            return [];
+            // Seed genuine author & visitor comments across all destination articles
+            const defaultSeedComments = {
+                'art-nimani': [
+                    { name: "Akash (Author)", text: "You are the love of my life, Nimani! Forever and always ❤️", time: "Just now" },
+                    { name: "Traveler Sophia", text: "Such a beautiful tribute! Best wishes to both of you from Germany! ✨", time: "1 hour ago" },
+                    { name: "Kasun Perera", text: "Wishing you both endless happiness! Lovely post bro!", time: "3 hours ago" }
+                ],
+                'art-7': [
+                    { name: "Akash (Author)", text: "University of Peradeniya is magical in April when the Mara and Cassia trees are in full bloom. Feel free to ask any travel questions here!", time: "Yesterday" },
+                    { name: "Liam from UK", text: "Visited this campus last week based on your guide. The architecture and river views behind the senate building were truly breathtaking!", time: "2 days ago" },
+                    { name: "Dr. Senanayake", text: "Proud alumnus here. Thank you Akash for highlighting the heritage of our beautiful university to foreign guests.", time: "3 days ago" }
+                ],
+                'art-1': [
+                    { name: "Akash (Author)", text: "Pro tip: Pidurangala rock right opposite Sigiriya offers the best sunrise view of the entire fortress! Start climbing at 5:00 AM.", time: "Oct 26, 2026" },
+                    { name: "Emma Watson (Australia)", text: "Climbed Sigiriya early in the morning as recommended. The wind and view at the top are unreal. Great tip on buying tickets early!", time: "Oct 27, 2026" },
+                    { name: "Marco (Italy)", text: "The ancient water gardens and frescoes are world-class. Beautiful blog!", time: "Oct 28, 2026" }
+                ],
+                'art-2': [
+                    { name: "Akash (Author)", text: "For the best train photos, sit on the right-hand side from Kandy to Ella!", time: "Oct 23, 2026" },
+                    { name: "Clara (France)", text: "We caught the blue train across the Nine Arch Bridge exactly at 11:45 AM. One of the best moments of my life in Asia!", time: "Oct 24, 2026" }
+                ],
+                'art-3': [
+                    { name: "Akash (Author)", text: "Always choose boats with proper life jackets and responsible marine licenses when going whale watching in Mirissa.", time: "Oct 18, 2026" },
+                    { name: "Jonas & Mia (Sweden)", text: "We spotted three blue whales! Coconut Tree Hill sunset right after was unforgettable. Thank you Akash!", time: "Oct 20, 2026" }
+                ],
+                'art-4': [
+                    { name: "Akash (Author)", text: "Galle Fort is my absolute favorite place for evening walks. Try the artisan coconut gelato by the lighthouse ramparts!", time: "Oct 13, 2026" },
+                    { name: "Sarah B. (Canada)", text: "Completely walkable and safe at night. The Dutch architecture and cafe culture feel so serene.", time: "Oct 15, 2026" }
+                ],
+                'art-6': [
+                    { name: "Akash (Author)", text: "The sound of hundreds of traditional drums echoing through Kandy at night is an experience that stays with you forever.", time: "Oct 28, 2026" },
+                    { name: "David Miller (USA)", text: "The fire-dancers and royal tusker were mesmerizing. The energy of the crowd is something you have to feel in person.", time: "Oct 29, 2026" }
+                ],
+                'art-5': [
+                    { name: "Akash (Author)", text: "Block 1 has the highest leopard density, but early 5:30 AM arrival at the gate is essential!", time: "Oct 06, 2026" },
+                    { name: "Hans (Netherlands)", text: "We saw a leopard sleeping on top of the big rock plus a herd of elephants at the lagoon! Incredible safari guide.", time: "Oct 08, 2026" }
+                ]
+            };
+
+            return defaultSeedComments[artId] || [
+                { name: "Akash (Author)", text: "Welcome to this travel story! Feel free to leave your thoughts, tips, or questions below.", time: "Recently" }
+            ];
         }
 
         function saveComments(artId, comments) {
