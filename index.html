@@ -431,6 +431,39 @@
             font-weight: 600;
             font-size: 0.92rem;
             cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            background: #ecfdf5;
+            transition: all 0.2s ease;
+        }
+
+        .read-more:hover {
+            background: #d1fae5;
+            color: var(--primary-hover);
+            transform: translateX(2px);
+        }
+
+        .btn-show-guide {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: #f1f5f9;
+            color: #334155;
+            border: 1px solid var(--border-color);
+            padding: 0.35rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-show-guide:hover {
+            background: #e2e8f0;
+            color: var(--primary);
         }
 
         /* Article Interactive Section (Like & Comments) */
@@ -1465,6 +1498,19 @@
         </div>
     </div>
 
+    <!-- ARTICLE DETAIL PREVIEW MODAL -->
+    <div class="admin-modal-overlay" id="articleDetailModalOverlay" onclick="if(event.target.id === 'articleDetailModalOverlay') closeArticleDetailModal()">
+        <div class="admin-modal" style="max-width: 750px;">
+            <div class="modal-header" style="background:#047857;">
+                <h3 id="detailModalHeading">👁️ Article Details</h3>
+                <button class="btn-close-modal" onclick="closeArticleDetailModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="articleDetailModalBody" style="padding: 1.75rem;">
+                <!-- Filled dynamically by JavaScript -->
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="footer-content">
@@ -1693,6 +1739,7 @@
                     <div id="heart-rain-${art.id}" class="heart-rain-box"></div>
 
                     <div class="card-admin-actions">
+                        <button class="btn-card-action" onclick="showArticleDetails('${art.id}')" title="Preview full story">👁️ Show</button>
                         <button class="btn-card-action" onclick="editArticle('${art.id}')">✏️ Edit</button>
                         <button class="btn-card-action btn-del" onclick="deleteArticle('${art.id}')">🗑️ Delete</button>
                     </div>
@@ -1723,7 +1770,9 @@
                                 <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Akash">
                                 <span>${escapeHtml(art.author || 'Akash')} • Travel Writer</span>
                             </a>
-                            <span class="read-more" onclick="alert('Full guide details for: ${escapeJsString(art.title)}')">Read Full Itinerary &rarr;</span>
+                            <span class="read-more" onclick="showArticleDetails('${art.id}')">
+                                <span>👁️ Show Article</span> &rarr;
+                            </span>
                         </div>
 
                         <!-- 10-Second Heart Animation Toast -->
@@ -1793,6 +1842,7 @@
                     <td><span class="badge-cat">${escapeHtml(art.category)}</span></td>
                     <td style="text-align: right;">
                         <div class="table-actions" style="justify-content: flex-end;">
+                            <button class="btn-sm-action" style="background:#f1f5f9; color:#334155;" onclick="showArticleDetails('${art.id}')" title="Preview article modal">👁️ Show</button>
                             <button class="btn-sm-action btn-sm-edit" onclick="editArticle('${art.id}')">Edit</button>
                             <button class="btn-sm-action btn-sm-del" onclick="deleteArticle('${art.id}')">Delete</button>
                         </div>
@@ -1841,6 +1891,40 @@
                 document.getElementById('tabBtnSettings').classList.add('active');
                 document.getElementById('tabContentSettings').style.display = 'block';
             }
+        }
+
+        // Show Article Details Modal
+        function showArticleDetails(id) {
+            const art = articles.find(a => a.id === id);
+            if (!art) return;
+
+            document.getElementById('detailModalHeading').innerText = `👁️ ${art.title}`;
+            const body = document.getElementById('articleDetailModalBody');
+            body.innerHTML = `
+                <img src="${escapeHtml(art.image)}" style="width:100%; max-height:300px; object-fit:cover; border-radius:10px; margin-bottom:1rem;" onerror="this.src='https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=1200&q=80'">
+                <div style="display:flex; gap:0.5rem; align-items:center; margin-bottom:0.75rem; font-size:0.85rem; color:var(--text-muted);">
+                    <span class="badge-cat">${escapeHtml(art.category)}</span>
+                    <span>📍 ${escapeHtml(art.region)}</span>
+                    <span>•</span>
+                    <span>⏱️ ${escapeHtml(art.readTime || '6 min read')}</span>
+                    <span>•</span>
+                    <span>✍️ By ${escapeHtml(art.author || 'Akash')}</span>
+                </div>
+                <h3 style="font-size:1.4rem; font-weight:700; margin-bottom:1rem; line-height:1.35;">${escapeHtml(art.title)}</h3>
+                <p style="font-size:1rem; line-height:1.7; color:#334155; margin-bottom:1.25rem; white-space:pre-line;">${escapeHtml(art.excerpt)}</p>
+                <div class="foreign-traveler-tips" style="margin-bottom:1.5rem;">
+                    💡 <strong>Tips & Highlights:</strong> ${escapeHtml(art.tips)}
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-color); padding-top:1rem;">
+                    <button class="btn-like" onclick="triggerLike('${art.id}'); alert('Liked! ❤️');">❤️ Like Story</button>
+                    <button class="btn-primary" onclick="closeArticleDetailModal()">Close Preview</button>
+                </div>
+            `;
+            document.getElementById('articleDetailModalOverlay').style.display = 'flex';
+        }
+
+        function closeArticleDetailModal() {
+            document.getElementById('articleDetailModalOverlay').style.display = 'none';
         }
 
         // Editor Operations
