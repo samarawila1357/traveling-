@@ -246,6 +246,40 @@
             position: relative;
         }
 
+        /* Full Article Heart Rain Container */
+        .heart-rain-box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 30;
+            display: none;
+        }
+
+        .falling-heart {
+            position: absolute;
+            top: -50px;
+            user-select: none;
+            animation: fallHeart linear forwards;
+        }
+
+        @keyframes fallHeart {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(0.7);
+                opacity: 1;
+            }
+            80% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(1150px) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
         .article-card:hover {
             transform: translateY(-3px);
             box-shadow: var(--shadow-hover);
@@ -1655,6 +1689,9 @@
 
             container.innerHTML = articles.map(art => `
                 <article class="article-card" id="${art.id}">
+                    <!-- Heart Rain Overlay across entire article card -->
+                    <div id="heart-rain-${art.id}" class="heart-rain-box"></div>
+
                     <div class="card-admin-actions">
                         <button class="btn-card-action" onclick="editArticle('${art.id}')">✏️ Edit</button>
                         <button class="btn-card-action btn-del" onclick="deleteArticle('${art.id}')">🗑️ Delete</button>
@@ -1983,16 +2020,58 @@
             const countEl = document.getElementById(`like-count-${artId}`);
             if (countEl) countEl.innerText = likes[artId];
 
-            // Show 10-Second Floating Heart Banner
+            // 1. Show 10-Second Floating Heart Banner
             const toast = document.getElementById(`heart-toast-${artId}`);
             if (toast) {
                 toast.style.display = 'block';
-                // Reset any existing timeout
                 if (toast._timer) clearTimeout(toast._timer);
                 toast._timer = setTimeout(() => {
                     toast.style.display = 'none';
-                }, 10000); // exactly 10 seconds
+                }, 10000); // 10 seconds
             }
+
+            // 2. Start Full 10-Second Heart Rain across the whole article
+            startHeartRain(artId);
+        }
+
+        function startHeartRain(artId) {
+            const container = document.getElementById(`heart-rain-${artId}`);
+            if (!container) return;
+
+            container.innerHTML = '';
+            container.style.display = 'block';
+
+            const heartSymbols = ['❤️', '💖', '💕', '💗', '💓', '💞', '💘', '🌸', '✨'];
+            
+            // Interval to spawn raining hearts over 10 seconds
+            const spawnInterval = setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'falling-heart';
+                heart.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = Math.random() * 95 + '%';
+                heart.style.fontSize = (Math.random() * 1.5 + 1.2) + 'rem';
+                
+                // Random fall speed between 2s and 4s
+                const duration = Math.random() * 2 + 2.2;
+                heart.style.animationDuration = duration + 's';
+                
+                container.appendChild(heart);
+
+                // Remove heart once fallen
+                setTimeout(() => {
+                    if (heart.parentNode) heart.parentNode.removeChild(heart);
+                }, duration * 1000);
+            }, 180); // Spawn heart every 180ms
+
+            // Stop spawning after 10 seconds and cleanup
+            if (container._rainTimer) clearTimeout(container._rainTimer);
+            container._rainTimer = setTimeout(() => {
+                clearInterval(spawnInterval);
+                setTimeout(() => {
+                    container.style.display = 'none';
+                    container.innerHTML = '';
+                }, 3500);
+            }, 10000); // exactly 10 seconds
         }
 
         // --- Interaction: Comments System ---
